@@ -141,5 +141,5 @@ export const IMAGES = {
       aspect: 'aspect-[3/2]',
     },
   ],
-  story: 'https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=1000&q=80',
+  story: '/story-before-after.jpg',
 };
