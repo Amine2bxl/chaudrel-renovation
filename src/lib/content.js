@@ -8,7 +8,7 @@ export const BRAND = {
   name: 'Chaudrel',
   tagline: 'Rénovation',
   founded: 2009,
-  email: 'Info@chaudrel.be',
+  email: 'amineazouzi2009@gmail.com',
   phones: [
     { name: 'Alberto', number: '+32 477 27 31 18', tel: '+32477273118' },
     { name: 'Matteo', number: '+32 493 97 25 17', tel: '+32493972517' },
