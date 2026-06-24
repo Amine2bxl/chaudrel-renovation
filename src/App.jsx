@@ -1,3 +1,4 @@
+import { MenuProvider } from '@/lib/menu-context';
 import Navbar from '@/components/landing/Navbar';
 import MobileBar from '@/components/landing/MobileBar';
 import Hero from '@/components/landing/Hero';
@@ -14,22 +15,24 @@ import Footer from '@/components/landing/Footer';
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-brand-cream">
-      <Navbar />
-      <MobileBar />
-      <main>
-        <Hero />
-        <SocialProof />
-        <Services />
-        <Portfolio />
-        <BeforeAfter />
-        <Story />
-        <Benefits />
-        <Testimonials />
-        <FAQ />
-        <CTA />
-      </main>
-      <Footer />
-    </div>
+    <MenuProvider>
+      <div className="min-h-screen bg-brand-cream">
+        <Navbar />
+        <MobileBar />
+        <main>
+          <Hero />
+          <SocialProof />
+          <Services />
+          <Portfolio />
+          <BeforeAfter />
+          <Story />
+          <Benefits />
+          <Testimonials />
+          <FAQ />
+          <CTA />
+        </main>
+        <Footer />
+      </div>
+    </MenuProvider>
   );
 }
