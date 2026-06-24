@@ -45,14 +45,14 @@ const cardVariants = {
 
 export default function Benefits() {
   return (
-    <section id="benefits" className="py-14 lg:py-32 bg-brand-dark">
+    <section id="benefits" className="py-10 md:py-14 lg:py-32 bg-brand-dark">
       <div className="max-w-7xl mx-auto px-5 lg:px-10">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.7 }}
-          className="text-center mb-8 lg:mb-20"
+          className="text-center mb-6 lg:mb-20"
         >
           <p className="text-[11px] tracking-[0.25em] uppercase text-brand-gold font-semibold mb-4">
             Pourquoi Chaudrel
@@ -73,7 +73,7 @@ export default function Benefits() {
               whileInView="visible"
               viewport={{ once: true, margin: '-40px' }}
               variants={cardVariants}
-              className="group bg-white/5 hover:bg-white/10 border border-white/10 hover:border-brand-gold/30 rounded-2xl p-7 transition-all duration-300"
+              className="group bg-white/5 hover:bg-white/10 border border-white/10 hover:border-brand-gold/30 rounded-2xl p-5 sm:p-7 transition-all duration-300"
             >
               <div className="w-10 h-10 rounded-xl bg-brand-gold/15 flex items-center justify-center mb-5 group-hover:bg-brand-gold/25 transition-colors duration-300">
                 <b.icon className="w-5 h-5 text-brand-gold" strokeWidth={1.5} aria-hidden="true" />

@@ -29,14 +29,14 @@ const FAQS = [
 
 export default function FAQ() {
   return (
-    <section id="faq" className="py-14 lg:py-32 bg-brand-cream">
+    <section id="faq" className="py-10 md:py-14 lg:py-32 bg-brand-cream">
       <div className="max-w-3xl mx-auto px-5 lg:px-10">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.7 }}
-          className="text-center mb-8 lg:mb-14"
+          className="text-center mb-6 lg:mb-14"
         >
           <p className="text-[11px] tracking-[0.25em] uppercase text-brand-gold font-semibold mb-3">
             Questions Fréquentes

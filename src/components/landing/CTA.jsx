@@ -5,14 +5,14 @@ import { BRAND } from '@/lib/content';
 
 export default function CTA() {
   return (
-    <section id="contact" className="py-24 lg:py-32 bg-brand-dark relative overflow-hidden">
+    <section id="contact" className="py-14 md:py-20 lg:py-32 bg-brand-dark relative overflow-hidden">
       <div
         aria-hidden="true"
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-gold/5 rounded-full blur-3xl pointer-events-none"
       />
 
       <div className="relative max-w-7xl mx-auto px-5 lg:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -27,11 +27,11 @@ export default function CTA() {
               <br />
               <span className="italic text-brand-goldLight">Votre Espace ?</span>
             </h2>
-            <p className="text-[15px] text-white/45 font-light leading-[1.8] mb-10 max-w-sm">
+            <p className="text-[15px] text-white/45 font-light leading-[1.8] mb-6 max-w-sm">
               Consultation gratuite et sans engagement. Nous nous déplaçons chez vous pour évaluer votre projet et vous accompagner de A à Z.
             </p>
 
-            <div className="space-y-4">
+            <div className="space-y-3">
               {BRAND.phones.map(({ name, number, tel }) => (
                 <a
                   key={name}
@@ -144,7 +144,7 @@ function ContactForm() {
 
   if (sent) {
     return (
-      <div className="bg-white/5 border border-white/10 rounded-3xl p-10 flex flex-col items-center justify-center h-full text-center min-h-[400px]">
+      <div className="bg-white/5 border border-white/10 rounded-3xl p-10 flex flex-col items-center justify-center h-full text-center min-h-[280px] sm:min-h-[400px]">
         <div className="w-16 h-16 rounded-full bg-brand-gold/20 flex items-center justify-center mb-6" aria-hidden="true">
           <span className="text-3xl text-brand-gold">✓</span>
         </div>
@@ -163,7 +163,7 @@ function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white/5 border border-white/10 rounded-3xl p-8 space-y-5"
+      className="bg-white/5 border border-white/10 rounded-3xl p-5 sm:p-8 space-y-4 sm:space-y-5"
       noValidate
     >
       <div className="grid grid-cols-2 gap-4">
@@ -211,7 +211,7 @@ function ContactForm() {
 
       <button
         type="submit"
-        className="w-full py-4 bg-brand-gold hover:bg-brand-goldLight text-white text-[13px] tracking-[0.15em] uppercase font-semibold rounded-2xl transition-all duration-300 shadow-lg shadow-brand-gold/20"
+        className="w-full py-3.5 sm:py-4 bg-brand-gold hover:bg-brand-goldLight text-white text-[13px] tracking-[0.15em] uppercase font-semibold rounded-2xl transition-all duration-300 shadow-lg shadow-brand-gold/20"
       >
         Envoyer ma demande →
       </button>

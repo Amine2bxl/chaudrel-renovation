@@ -10,9 +10,9 @@ const TIMELINE = [
 
 export default function Story() {
   return (
-    <section id="story" className="py-14 lg:py-32 bg-brand-cream">
+    <section id="story" className="py-10 md:py-14 lg:py-32 bg-brand-cream">
       <div className="max-w-7xl mx-auto px-5 lg:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -60,11 +60,11 @@ export default function Story() {
             <p className="text-[15px] text-brand-ink/60 font-light leading-[1.85] mb-6">
               Chaudrel Rénovation est née d'une conviction profonde : la rénovation ne se limite pas à refaire des murs — c'est l'art de réinventer un espace pour qu'il reflète qui vous êtes.
             </p>
-            <p className="text-[15px] text-brand-ink/60 font-light leading-[1.85] mb-10">
+            <p className="text-[15px] text-brand-ink/60 font-light leading-[1.85] mb-6">
               Fondée par <strong className="text-brand-ink/80 font-medium">Alberto et Matteo</strong>, deux artisans passionnés, notre entreprise s'est forgée une réputation d'excellence en alliant savoir-faire artisanal et vision contemporaine. Chaque projet est un engagement personnel.
             </p>
 
-            <div className="space-y-4 mb-10">
+            <div className="space-y-3 mb-8">
               {TIMELINE.map((t, i) => (
                 <motion.div
                   key={t.year}

@@ -86,7 +86,7 @@ export default function BeforeAfter() {
   const project = PROJECTS[current];
 
   return (
-    <section className="py-14 lg:py-28 bg-brand-cream">
+    <section className="py-10 md:py-12 lg:py-28 bg-brand-cream">
       <div className="max-w-7xl mx-auto px-5 lg:px-10">
         <div className="flex items-end justify-between mb-8 gap-4">
           <div>

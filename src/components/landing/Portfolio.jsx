@@ -4,14 +4,14 @@ import { IMAGES } from '@/lib/content';
 
 export default function Portfolio() {
   return (
-    <section id="portfolio" className="py-14 lg:py-36 bg-white">
+    <section id="portfolio" className="py-10 md:py-14 lg:py-36 bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.7 }}
-          className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16 lg:mb-24 gap-6"
+          className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-10 lg:mb-24 gap-6"
         >
           <div>
             <div className="flex items-center gap-4 mb-6">

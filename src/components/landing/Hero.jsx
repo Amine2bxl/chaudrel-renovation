@@ -28,7 +28,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D0D]/90 via-[#0D0D0D]/40 to-[#0D0D0D]/10" />
       </motion.div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-5 lg:px-10 pb-16 lg:pb-24 pt-32 w-full">
+      <div className="relative z-10 max-w-7xl mx-auto px-5 lg:px-10 pb-10 lg:pb-24 pt-20 sm:pt-24 lg:pt-32 w-full">
         <div className="max-w-3xl">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -50,7 +50,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}
-            className="font-display text-5xl sm:text-6xl lg:text-7xl font-light text-white leading-[1.05] mb-6"
+            className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-light text-white leading-[1.1] sm:leading-[1.05] mb-6"
           >
             La Passion de Rénover.
             <br />
@@ -61,7 +61,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9, duration: 0.7 }}
-            className="text-base lg:text-lg text-white/60 font-light leading-relaxed max-w-lg mb-10"
+            className="text-sm sm:text-base lg:text-lg text-white/60 font-light leading-relaxed max-w-lg mb-6 sm:mb-8 lg:mb-10"
           >
             Chaudrel transforme votre maison en chef-d'œuvre. Cuisine, salle de bain,
             jardin, toiture — chaque détail, chaque matériau, chaque finition reflète
@@ -76,7 +76,7 @@ export default function Hero() {
           >
             <a
               href="#contact"
-              className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 bg-brand-gold text-white text-[13px] tracking-[0.1em] uppercase font-semibold rounded-full hover:bg-brand-goldLight transition-all duration-300 shadow-xl shadow-brand-gold/30"
+              className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-7 py-3 sm:py-3.5 bg-brand-gold text-white text-[13px] tracking-[0.1em] uppercase font-semibold rounded-full hover:bg-brand-goldLight transition-all duration-300 shadow-xl shadow-brand-gold/30"
             >
               Devis gratuit
               <ArrowRight className="w-4 h-4" />
@@ -95,9 +95,9 @@ export default function Hero() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.6, duration: 0.8 }}
-        className="relative z-10 mx-5 lg:mx-10 mb-8 lg:mb-10"
+        className="relative z-10 mx-4 sm:mx-5 lg:mx-10 mb-6 sm:mb-8 lg:mb-10"
       >
-        <div className="bg-white/10 backdrop-blur-xl border border-white/15 rounded-2xl px-6 lg:px-10 py-5 grid grid-cols-2 sm:grid-cols-4 gap-6">
+        <div className="bg-white/10 backdrop-blur-xl border border-white/15 rounded-2xl px-4 sm:px-6 lg:px-10 py-4 sm:py-5 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6">
           {STATS.map((s) => (
             <div key={s.l} className="flex flex-col items-center text-center">
               <p className="font-display text-2xl lg:text-3xl font-light text-white">{s.n}</p>

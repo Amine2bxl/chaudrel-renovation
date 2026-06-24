@@ -38,7 +38,7 @@ export default function Footer() {
     <footer className="bg-[#0D0D0D] text-white/40">
       <div className="h-px bg-gradient-to-r from-transparent via-brand-gold/30 to-transparent" aria-hidden="true" />
 
-      <div className="max-w-7xl mx-auto px-5 lg:px-10 py-16 lg:py-20">
+      <div className="max-w-7xl mx-auto px-5 lg:px-10 py-10 md:py-14 lg:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-14">
           <div>
             <div className="flex items-center gap-3 mb-5">

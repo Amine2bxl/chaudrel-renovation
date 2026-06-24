@@ -76,9 +76,9 @@ function Stars({ count = 5 }) {
 
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="py-14 lg:py-32 bg-white overflow-hidden">
+    <section id="testimonials" className="py-10 md:py-14 lg:py-32 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-5 lg:px-10">
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-8 lg:mb-14 gap-4 lg:gap-6">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-6 lg:mb-14 gap-4 lg:gap-6">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -127,7 +127,7 @@ export default function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-30px' }}
               transition={{ delay: i * 0.07, duration: 0.6 }}
-              className="bg-brand-cream hover:bg-white border border-brand-gold/0 hover:border-brand-gold/12 hover:shadow-lg rounded-2xl p-6 transition-all duration-400"
+              className="bg-brand-cream hover:bg-white border border-brand-gold/0 hover:border-brand-gold/12 hover:shadow-lg rounded-2xl p-4 sm:p-6 transition-all duration-400"
             >
               <div className="flex items-center justify-between mb-4">
                 <Stars count={t.rating} />

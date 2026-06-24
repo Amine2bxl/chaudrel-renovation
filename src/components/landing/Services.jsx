@@ -9,14 +9,14 @@ export default function Services() {
   const [active, setActive] = useState(0);
 
   return (
-    <section id="services" className="py-14 lg:py-36">
+    <section id="services" className="py-10 md:py-14 lg:py-36">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.7 }}
-          className="mb-10 lg:mb-24"
+          className="mb-6 lg:mb-24"
         >
           <div className="flex items-center gap-4 mb-6">
             <div className="w-12 h-px bg-brand-gold" aria-hidden="true" />
