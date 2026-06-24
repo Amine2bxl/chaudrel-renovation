@@ -1,4 +1,5 @@
 import Navbar from '@/components/landing/Navbar';
+import MobileBar from '@/components/landing/MobileBar';
 import Hero from '@/components/landing/Hero';
 import SocialProof from '@/components/landing/SocialProof';
 import Services from '@/components/landing/Services';
@@ -15,6 +16,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-brand-cream">
       <Navbar />
+      <MobileBar />
       <main>
         <Hero />
         <SocialProof />
