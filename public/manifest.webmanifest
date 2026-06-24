@@ -1,0 +1,10 @@
+{
+  "name": "Chaudrel Rénovation",
+  "short_name": "Chaudrel",
+  "description": "Chaudrel Rénovation — Rénovation haut de gamme à Bruxelles. Cuisine, salle de bain, toiture, jardin, piscine.",
+  "lang": "fr",
+  "dir": "ltr",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation
