@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Phone } from 'lucide-react';
-import { BRAND, LOGO_SVG } from '@/lib/content';
+import { BRAND, LOGO } from '@/lib/content';
 
 const NAV_LINKS = [
   { label: 'Services', href: '#services' },
@@ -14,9 +14,11 @@ const NAV_LINKS = [
 function Brand({ scrolled }) {
   return (
     <a href="#top" className="flex items-center gap-2.5 group">
-      <img src={LOGO_SVG} alt={`${BRAND.name} ${BRAND.tagline}`} className="h-9 w-9 rounded-lg" width="36" height="36" />
+      <div className="h-11 w-11 rounded-lg bg-white p-0.5 ring-1 ring-brand-gold/30 flex items-center justify-center">
+        <img src={LOGO} alt={`${BRAND.name} ${BRAND.tagline}`} className="h-full w-full object-contain" width="44" height="44" />
+      </div>
       <span className="flex flex-col leading-none">
-        <span className={`font-display text-base lg:text-lg tracking-[0.1em] font-semibold transition-colors duration-300 ${scrolled ? 'text-brand-ink' : 'text-white'}`}>
+        <span className={`font-display text-lg lg:text-xl tracking-[0.1em] font-semibold transition-colors duration-300 ${scrolled ? 'text-brand-ink' : 'text-white'}`}>
           {BRAND.name.toUpperCase()}
         </span>
         <span className="text-[9px] tracking-[0.2em] uppercase text-brand-gold font-medium">
@@ -118,7 +120,9 @@ export default function Navbar() {
           >
             <div className="flex items-center justify-between px-5 h-16 border-b border-gray-100">
               <div className="flex items-center gap-2.5">
-                <img src={LOGO_SVG} alt="" className="h-8 w-8 rounded-lg" />
+                <div className="h-8 w-8 rounded-lg bg-white p-0.5 ring-1 ring-brand-gold/30 flex items-center justify-center">
+                  <img src={LOGO} alt="" className="h-full w-full object-contain" />
+                </div>
                 <span className="font-display text-lg tracking-wide text-brand-ink font-semibold">
                   {BRAND.name.toUpperCase()}
                 </span>

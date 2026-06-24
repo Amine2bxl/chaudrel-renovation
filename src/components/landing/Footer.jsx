@@ -1,5 +1,5 @@
 import { Instagram, Facebook, Youtube } from 'lucide-react';
-import { BRAND, LOGO_SVG } from '@/lib/content';
+import { BRAND, LOGO } from '@/lib/content';
 
 // TikTok : icône inline (pas dans lucide-react)
 function TikTokIcon({ className }) {
@@ -42,11 +42,11 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-14">
           <div>
             <div className="flex items-center gap-3 mb-5">
-              <div className="h-11 w-11 rounded-xl overflow-hidden flex-shrink-0 border border-brand-gold/40">
-                <img src={LOGO_SVG} alt={`${BRAND.name} Rénovation`} className="h-full w-full" width={44} height={44} />
+              <div className="h-14 w-14 lg:h-16 lg:w-16 rounded-xl overflow-hidden flex-shrink-0 border border-brand-gold/40 bg-white p-1 flex items-center justify-center">
+                <img src={LOGO} alt={`${BRAND.name} ${BRAND.tagline}`} className="h-full w-full object-contain" width="64" height="64" />
               </div>
               <div>
-                <p className="font-display text-lg font-semibold text-white tracking-wide leading-none">
+                <p className="font-display text-xl lg:text-2xl font-semibold text-white tracking-wide leading-none">
                   {BRAND.name.toUpperCase()}
                 </p>
                 <p className="text-[9px] tracking-[0.22em] uppercase text-brand-gold font-medium mt-1">

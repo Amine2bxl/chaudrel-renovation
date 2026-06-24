@@ -22,16 +22,9 @@ export const BRAND = {
   },
 };
 
-// Logo minimaliste inline (pas de requête réseau, rendu instantané)
-export const LOGO_SVG =
-  'data:image/svg+xml;utf8,' +
-  encodeURIComponent(
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-      <rect width="64" height="64" rx="14" fill="#8C764E"/>
-      <text x="50%" y="58%" text-anchor="middle" font-family="Georgia, serif"
-            font-size="38" font-style="italic" font-weight="500" fill="#F7F5F2">C</text>
-    </svg>`
-  );
+// Logo officiel Chaudrel (fichier dans /public, versionné dans Git).
+// Chemin absolu servi par Vite depuis le dossier public/.
+export const LOGO = '/chaudrel-logo.jpg';
 
 export const IMAGES = {
   hero: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80',
