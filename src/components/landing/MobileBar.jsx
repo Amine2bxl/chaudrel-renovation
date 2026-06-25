@@ -32,14 +32,14 @@ export default function MobileBar() {
 
   return (
     <div
-      className="lg:hidden fixed top-16 left-0 right-0 z-40 bg-white/95 backdrop-blur-xl border-b border-brand-gold/15 shadow-sm"
+      className="lg:hidden fixed top-0 left-0 right-0 z-[55] bg-white/95 backdrop-blur-xl border-b border-brand-gold/15 shadow-sm"
       role="toolbar"
       aria-label="Actions rapides"
     >
       <div className="max-w-screen-sm mx-auto px-3 flex items-center justify-between gap-2 h-12">
         <a
-          href={`tel:${BRAND.phones[0].tel}`}
-          aria-label={`Appeler ${BRAND.phones[0].name}`}
+          href={`tel:${BRAND.phones[1].tel}`}
+          aria-label={`Appeler ${BRAND.phones[1].name}`}
           className="flex-1 flex items-center justify-center gap-1.5 h-9 rounded-full bg-brand-gold text-white text-[12px] font-semibold tracking-wide shadow-md shadow-brand-gold/25 active:scale-95 transition-transform"
         >
           <Phone className="w-4 h-4" aria-hidden="true" />
