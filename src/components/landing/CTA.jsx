@@ -106,6 +106,16 @@ const PROJECT_TYPES = [
   { value: 'Autre', label: 'Autre' },
 ];
 
+const PROPERTY_TYPES = [
+  { value: '', label: 'Sélectionnez' },
+  { value: 'Appartement', label: 'Appartement' },
+  { value: 'Maison', label: 'Maison' },
+  { value: 'Villa', label: 'Villa' },
+  { value: 'Loft', label: 'Loft' },
+  { value: 'Commerce / Bureau', label: 'Commerce / Bureau' },
+  { value: 'Autre', label: 'Autre' },
+];
+
 const inputClass =
   'w-full bg-[#1C1C1C] border border-white/12 rounded-xl px-4 py-3 text-white text-[14px] font-light placeholder:text-white/20 outline-none focus:border-brand-gold/50 transition-all duration-200';
 const labelClass =
@@ -121,6 +131,9 @@ function ContactForm() {
     const nom = fd.get('nom');
     const email = fd.get('email');
     const telephone = fd.get('telephone');
+    const codePostal = fd.get('code_postal');
+    const ville = fd.get('ville');
+    const typeBien = fd.get('type_bien');
     const projet = fd.get('projet');
     const message = fd.get('message');
 
@@ -129,6 +142,8 @@ function ContactForm() {
       `Nom : ${prenom} ${nom}\n` +
       `Email : ${email}\n` +
       `Téléphone : ${telephone}\n` +
+      `Localisation : ${codePostal} ${ville}\n` +
+      `Type de bien : ${typeBien}\n` +
       `Type de projet : ${projet}\n\n` +
       `Message :\n${message}`;
 
@@ -186,6 +201,53 @@ function ContactForm() {
         <label htmlFor="telephone" className={labelClass}>Téléphone</label>
         <input id="telephone" name="telephone" type="tel" placeholder="+32 ..." className={inputClass} />
       </div>
+
+      <fieldset className="space-y-3 p-4 bg-white/[0.03] border border-white/8 rounded-2xl">
+        <legend className="px-2 text-[10px] tracking-[0.18em] uppercase text-brand-goldLight/80 font-semibold">
+          Localisation
+        </legend>
+
+        <div className="grid grid-cols-3 gap-3">
+          <div className="col-span-1">
+            <label htmlFor="code_postal" className={labelClass}>Code postal</label>
+            <input
+              id="code_postal"
+              name="code_postal"
+              type="text"
+              inputMode="numeric"
+              maxLength="10"
+              placeholder="1050"
+              className={inputClass}
+            />
+          </div>
+          <div className="col-span-2">
+            <label htmlFor="ville" className={labelClass}>Ville</label>
+            <input
+              id="ville"
+              name="ville"
+              type="text"
+              placeholder="Ixelles"
+              className={inputClass}
+            />
+          </div>
+        </div>
+
+        <div>
+          <label htmlFor="type_bien" className={labelClass}>Type de bien</label>
+          <select
+            id="type_bien"
+            name="type_bien"
+            defaultValue=""
+            className={`${inputClass} appearance-none`}
+          >
+            {PROPERTY_TYPES.map((t) => (
+              <option key={t.value} value={t.value} className="bg-[#1C1C1C] text-white">
+                {t.label}
+              </option>
+            ))}
+          </select>
+        </div>
+      </fieldset>
 
       <div>
         <label htmlFor="projet" className={labelClass}>Type de projet</label>
