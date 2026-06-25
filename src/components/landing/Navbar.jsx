@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X } from 'lucide-react';
+import { Phone, X } from 'lucide-react';
 import { BRAND, LOGO } from '@/lib/content';
 import { useMenu } from '@/lib/menu-context';
 
@@ -90,6 +90,14 @@ export default function Navbar() {
             </nav>
 
             <div className="hidden lg:flex items-center gap-3">
+              <a
+                href={`tel:${BRAND.phones[1].tel}`}
+                aria-label={`Appeler ${BRAND.phones[1].name}`}
+                className="ml-1 flex items-center gap-2 px-4 py-2.5 bg-white text-brand-ink text-[12px] tracking-[0.12em] uppercase font-semibold rounded-full border border-brand-gold/30 hover:bg-brand-gold/10 hover:border-brand-gold/60 transition-all duration-300"
+              >
+                <Phone className="w-4 h-4 text-brand-gold" aria-hidden="true" />
+                <span>Appeler Matteo</span>
+              </a>
               <DesktopCTA />
             </div>
           </div>
