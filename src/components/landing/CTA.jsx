@@ -178,10 +178,10 @@ function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white/5 border border-white/10 rounded-3xl p-5 sm:p-8 space-y-4 sm:space-y-5"
+      className="bg-white/5 border border-white/10 rounded-3xl p-5 sm:p-7 lg:p-8 space-y-4 sm:space-y-5"
       noValidate
     >
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5">
         <div>
           <label htmlFor="prenom" className={labelClass}>Prénom</label>
           <input id="prenom" name="prenom" type="text" required placeholder="Votre prénom" className={inputClass} />
@@ -192,23 +192,24 @@ function ContactForm() {
         </div>
       </div>
 
-      <div>
-        <label htmlFor="email" className={labelClass}>Email</label>
-        <input id="email" name="email" type="email" required placeholder="votre@email.com" className={inputClass} />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5">
+        <div>
+          <label htmlFor="email" className={labelClass}>Email</label>
+          <input id="email" name="email" type="email" required placeholder="votre@email.com" className={inputClass} />
+        </div>
+        <div>
+          <label htmlFor="telephone" className={labelClass}>Téléphone</label>
+          <input id="telephone" name="telephone" type="tel" placeholder="+32 ..." className={inputClass} />
+        </div>
       </div>
 
-      <div>
-        <label htmlFor="telephone" className={labelClass}>Téléphone</label>
-        <input id="telephone" name="telephone" type="tel" placeholder="+32 ..." className={inputClass} />
-      </div>
-
-      <fieldset className="space-y-3 p-4 bg-white/[0.03] border border-white/8 rounded-2xl">
+      <fieldset className="space-y-4 sm:space-y-5 p-4 sm:p-5 bg-white/[0.03] border border-white/8 rounded-2xl">
         <legend className="px-2 text-[10px] tracking-[0.18em] uppercase text-brand-goldLight/80 font-semibold">
           Localisation
         </legend>
 
-        <div className="grid grid-cols-3 gap-3">
-          <div className="col-span-1">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
+          <div className="lg:col-span-1">
             <label htmlFor="code_postal" className={labelClass}>Code postal</label>
             <input
               id="code_postal"
@@ -220,7 +221,7 @@ function ContactForm() {
               className={inputClass}
             />
           </div>
-          <div className="col-span-2">
+          <div className="lg:col-span-2">
             <label htmlFor="ville" className={labelClass}>Ville</label>
             <input
               id="ville"

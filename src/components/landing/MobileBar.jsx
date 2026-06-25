@@ -1,15 +1,16 @@
 import { useEffect } from 'react';
 import { Phone, Mail, Menu } from 'lucide-react';
-import { BRAND } from '@/lib/content';
+import { BRAND, LOGO } from '@/lib/content';
 import { useMenu } from '@/lib/menu-context';
 
 /**
- * MobileBar — barre d'actions rapides affichée UNIQUEMENT sur mobile et tablette.
+ * MobileBar — barre de navigation affichée UNIQUEMENT sur mobile et tablette.
  * Cachée sur PC (lg:hidden).
  *
- * Contient, de gauche à droite, symétriquement :
- *  - 2 boutons d'action (Appeler + Email)
- *  - 1 bouton hamburger qui ouvre le menu principal
+ * Layout (gauche → droite) :
+ *  - Logo (lien vers le haut)
+ *  - 2 boutons d'action : Appeler + Email (visibles sm+, masqués en très petit)
+ *  - Bouton hamburger qui ouvre le menu principal
  *
  * Verrouille le scroll du body quand le menu est ouvert.
  */
@@ -32,36 +33,56 @@ export default function MobileBar() {
 
   return (
     <div
-      className="lg:hidden fixed top-0 left-0 right-0 z-[55] bg-white/95 backdrop-blur-xl border-b border-brand-gold/15 shadow-sm"
+      className="lg:hidden fixed top-0 left-0 right-0 z-[55] bg-white border-b border-brand-gold/15 shadow-sm"
       role="toolbar"
       aria-label="Actions rapides"
     >
-      <div className="max-w-screen-sm mx-auto px-3 flex items-center justify-between gap-2 h-12">
+      <div className="max-w-screen-sm mx-auto px-3 flex items-center justify-between gap-2 h-14">
         <a
-          href={`tel:${BRAND.phones[1].tel}`}
-          aria-label={`Appeler ${BRAND.phones[1].name}`}
-          className="flex-1 flex items-center justify-center gap-1.5 h-9 rounded-full bg-brand-gold text-white text-[12px] font-semibold tracking-wide shadow-md shadow-brand-gold/25 active:scale-95 transition-transform"
+          href="#top"
+          aria-label={`${BRAND.name} ${BRAND.tagline} — retour en haut`}
+          className="flex items-center gap-2 group"
         >
-          <Phone className="w-4 h-4" aria-hidden="true" />
-          <span>Appeler</span>
+          <div className="h-9 w-9 rounded-lg bg-white p-0.5 ring-1 ring-brand-gold/30 flex items-center justify-center flex-shrink-0">
+            <img src={LOGO} alt="" className="h-full w-full object-contain" />
+          </div>
+          <span className="flex flex-col leading-none">
+            <span className="font-display text-[15px] tracking-[0.1em] font-semibold text-brand-ink">
+              {BRAND.name.toUpperCase()}
+            </span>
+            <span className="text-[8px] tracking-[0.2em] uppercase text-brand-gold font-medium mt-0.5">
+              {BRAND.tagline}
+            </span>
+          </span>
         </a>
-        <a
-          href={`mailto:${BRAND.email}`}
-          aria-label="Envoyer un email"
-          className="flex-1 flex items-center justify-center gap-1.5 h-9 rounded-full bg-brand-cream text-brand-ink text-[12px] font-semibold tracking-wide border border-brand-gold/30 active:scale-95 transition-transform"
-        >
-          <Mail className="w-4 h-4 text-brand-gold" aria-hidden="true" />
-          <span>Email</span>
-        </a>
-        <button
-          onClick={() => setOpen((v) => !v)}
-          aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
-          aria-expanded={open}
-          aria-controls="main-mobile-menu"
-          className="w-9 h-9 flex items-center justify-center rounded-full bg-brand-ink text-white active:scale-95 transition-transform"
-        >
-          <Menu className="w-5 h-5" aria-hidden="true" />
-        </button>
+
+        <div className="flex items-center gap-1.5">
+          <a
+            href={`tel:${BRAND.phones[1].tel}`}
+            aria-label={`Appeler ${BRAND.phones[1].name}`}
+            className="flex h-10 w-10 sm:w-auto sm:px-3 sm:gap-1.5 items-center justify-center rounded-full bg-brand-gold text-white text-[12px] font-semibold tracking-wide shadow-md shadow-brand-gold/25 active:scale-95 transition-transform"
+          >
+            <Phone className="w-4 h-4" aria-hidden="true" />
+            <span className="hidden sm:inline">Appeler</span>
+          </a>
+          <a
+            href={`mailto:${BRAND.email}`}
+            aria-label="Envoyer un email"
+            className="flex h-10 w-10 sm:w-auto sm:px-3 sm:gap-1.5 items-center justify-center rounded-full bg-brand-cream text-brand-ink text-[12px] font-semibold tracking-wide border border-brand-gold/30 active:scale-95 transition-transform"
+          >
+            <Mail className="w-4 h-4 text-brand-gold" aria-hidden="true" />
+            <span className="hidden sm:inline">Email</span>
+          </a>
+          <button
+            onClick={() => setOpen((v) => !v)}
+            aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
+            aria-expanded={open}
+            aria-controls="main-mobile-menu"
+            className="h-10 w-10 flex items-center justify-center rounded-full bg-brand-ink text-white active:scale-95 transition-transform"
+          >
+            <Menu className="w-5 h-5" aria-hidden="true" />
+          </button>
+        </div>
       </div>
     </div>
   );

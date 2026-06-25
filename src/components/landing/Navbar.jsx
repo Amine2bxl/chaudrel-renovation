@@ -12,7 +12,7 @@ const NAV_LINKS = [
   { label: 'FAQ', href: '#faq' },
 ];
 
-function Brand({ scrolled }) {
+function Brand() {
   return (
     <a href="#top" className="flex items-center gap-2.5 group">
       <div className="h-11 w-11 rounded-lg bg-white p-0.5 ring-1 ring-brand-gold/30 flex items-center justify-center">
@@ -25,11 +25,7 @@ function Brand({ scrolled }) {
         />
       </div>
       <span className="flex flex-col leading-none">
-        <span
-          className={`font-display text-lg lg:text-xl tracking-[0.1em] font-semibold transition-colors duration-300 ${
-            scrolled ? 'text-brand-ink' : 'text-white'
-          }`}
-        >
+        <span className="font-display text-lg lg:text-xl tracking-[0.1em] font-semibold text-brand-ink">
           {BRAND.name.toUpperCase()}
         </span>
         <span className="text-[9px] tracking-[0.2em] uppercase text-brand-gold font-medium">
@@ -53,7 +49,6 @@ function DesktopCTA() {
 }
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [visible, setVisible] = useState(true);
   const [lastY, setLastY] = useState(0);
   const { open: mobileOpen, close: closeMenu } = useMenu();
@@ -61,7 +56,6 @@ export default function Navbar() {
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY;
-      setScrolled(y > 60);
       setVisible(y < 60 || y < lastY);
       setLastY(y);
     };
@@ -74,15 +68,11 @@ export default function Navbar() {
       <motion.header
         animate={{ y: visible ? 0 : -64 }}
         transition={{ duration: 0.3, ease: 'easeInOut' }}
-        className={`fixed top-12 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? 'bg-white/90 backdrop-blur-2xl border-b border-brand-gold/10 shadow-sm'
-            : 'bg-white/70 backdrop-blur-md border-b border-brand-gold/8'
-        }`}
+        className={`hidden lg:block fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white border-b border-brand-gold/15 shadow-sm`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-10">
           <div className="flex items-center justify-between h-14 lg:h-[72px]">
-            <Brand scrolled={scrolled} />
+            <Brand />
 
             <nav
               className="hidden lg:flex items-center gap-1"
@@ -92,9 +82,7 @@ export default function Navbar() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className={`px-4 py-2 rounded-full text-[13px] font-medium tracking-wide transition-all duration-200 hover:bg-brand-gold/10 hover:text-brand-gold ${
-                    scrolled ? 'text-brand-ink/70' : 'text-white/75'
-                  }`}
+                  className="px-4 py-2 rounded-full text-[13px] font-medium tracking-wide transition-all duration-200 text-brand-ink/70 hover:bg-brand-gold/10 hover:text-brand-gold"
                 >
                   {link.label}
                 </a>
