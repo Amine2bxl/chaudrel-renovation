@@ -96,7 +96,7 @@ export default function Navbar() {
                 className="ml-1 flex items-center gap-2 px-4 py-2.5 bg-white text-brand-ink text-[12px] tracking-[0.12em] uppercase font-semibold rounded-full border border-brand-gold/30 hover:bg-brand-gold/10 hover:border-brand-gold/60 transition-all duration-300"
               >
                 <Phone className="w-4 h-4 text-brand-gold" aria-hidden="true" />
-                <span>Appeler Matteo</span>
+                <span>Appeler</span>
               </a>
               <DesktopCTA />
             </div>
