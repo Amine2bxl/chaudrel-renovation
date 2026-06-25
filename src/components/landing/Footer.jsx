@@ -118,11 +118,8 @@ export default function Footer() {
         <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-[11px] tracking-wide">© {year} {BRAND.name} Rénovation. Tous droits réservés.</p>
           <div className="flex gap-5">
-            <a href="/legal/politique-confidentialite.html" className="text-[11px] tracking-wide hover:text-brand-gold transition-colors duration-200">
-              Politique de confidentialité
-            </a>
             <a href="/legal/mentions-legales.html" className="text-[11px] tracking-wide hover:text-brand-gold transition-colors duration-200">
-              Mentions légales
+              Mentions légales &amp; Confidentialité
             </a>
           </div>
         </div>

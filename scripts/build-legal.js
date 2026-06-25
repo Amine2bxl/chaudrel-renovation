@@ -1,16 +1,10 @@
 // Build des pages légales (politique de confidentialité, mentions légales).
-// Stratégie : SSR les composants React via renderToString, puis injecte le HTML
+// SSR les composants React via renderToString, puis injecte le HTML
 // dans dist/legal/<page>.html avec le même template (CSS, meta tags) que index.html.
 //
 // Usage : node scripts/build-legal.js  (lancé après `vite build && prerender`)
-//
-// Pourquoi ce nouveau build :
-//   - Avant : pages HTML statiques avec contenu en dur dans public/legal/.
-//     → Difficile à maintenir, design déconnecté de la DA du site.
-//   - Maintenant : composants React partagés (LegalPage, PrivacyPolicy, LegalNotice).
-//     → Même palette, même typographie, même design system que le reste du site.
 
-import { readFileSync, writeFileSync, existsSync, unlinkSync, mkdtempSync, mkdirSync, copyFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, unlinkSync, mkdtempSync, mkdirSync } from 'node:fs';
 import { resolve, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { tmpdir } from 'node:os';
@@ -31,8 +25,7 @@ function findCssHref(html) {
   return m ? m[1] : null;
 }
 
-function buildPage({ entryPath, pageTitle, pageDescription, canonicalPath, baseHref, indexTemplate }) {
-  // Bundle SSR pour cette page légale
+function buildPage({ entryPath, pageTitle, pageDescription, canonicalPath, baseHref, template }) {
   const ssrEntry = `
 import React from 'react';
 import { renderToString } from 'react-dom/server';
@@ -75,12 +68,7 @@ process.stdout.write('___SSR_OUT_START___' + html + '___SSR_OUT_END___');
   if (!m) fail(`Pattern SSR introuvable pour ${pageTitle}.`);
   const renderedHtml = m[1];
 
-  // Utilise le template index.html ORIGINAL (avant prerender), pas celui avec SSR injecté
-  let template = indexTemplate;
-  const cssHref = findCssHref(template) || '/assets/index.css';
-
-  // Adapte le head et injecte le HTML rendu
-  template = template
+  let html = template
     .replace(/<title>[\s\S]*?<\/title>/, `<title>${pageTitle}</title>`)
     .replace(/<meta name="description" content="[^"]*"\s*\/?>/, `<meta name="description" content="${pageDescription}" />`)
     .replace(/<link rel="canonical" href="[^"]*"\s*\/?>/, `<link rel="canonical" href="https://chaudrel.be${canonicalPath}" />`)
@@ -94,51 +82,54 @@ process.stdout.write('___SSR_OUT_START___' + html + '___SSR_OUT_END___');
     .replace(/<script type="module" src="[^"]*"><\/script>/, '')
     .replace(/(href|src)="\//g, `$1="${baseHref}`);
 
-  return template;
+  return html;
 }
 
 function main() {
   const indexPath = resolve(distDir, 'index.html');
   if (!existsSync(indexPath)) fail('dist/index.html introuvable. Lance `vite build` avant.');
 
-  // ⚠️ Le prerender a injecté le SSR dans dist/index.html. On a besoin de la version
-  // ORIGINALE (sans SSR) pour partir d'un template propre. On la reconstitue depuis
-  // le index.html source + le CSS compilé.
-  const sourceIndexPath = resolve(root, 'index.html');
-  const cssFile = readFileSync(indexPath, 'utf8').match(/href="(\/assets\/index-[^"]+\.css)"/)?.[1];
+  const distHtml = readFileSync(indexPath, 'utf8');
+  const cssHref = findCssHref(distHtml);
+  if (!cssHref) fail('Impossible de trouver le fichier CSS compilé.');
 
-  let template = readFileSync(sourceIndexPath, 'utf8');
-  if (cssFile) {
-    template = template.replace(
-      /<link rel="stylesheet" href="[^"]*" \/>/,
-      `<link rel="stylesheet" href="${cssFile}" />`
-    );
-  }
+  // Template = dist/index.html complet (avec <link> CSS Vite, fonts, etc.)
+  // On retire juste le bloc JSON-LD et le contenu SSR racine.
+  const template = distHtml
+    .replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/, '')
+    .replace(/<div id="root"[^>]*>[\s\S]*?<\/div>/, '<div id="root"></div>')
+    .replace(/<script type="module" src="[^"]*"><\/script>/, '');
+
+  // Réécrire les chemins d'assets pour qu'ils marchent depuis /legal/
+  const templateForLegal = template.replace(
+    /(href|src)="(\/[^"]*)"/g,
+    (match, attr, path) => `${attr}="${path.replace(/^\/assets\//, '../assets/').replace(/^\//, '../')}"`,
+  );
 
   const pages = [
     {
-      entryPath: resolve(root, 'src/components/landing/PrivacyPolicy.jsx'),
-      pageTitle: 'Politique de confidentialité — Chaudrel',
-      pageDescription: 'Comment Chaudrel Rénovation protège vos données personnelles : collecte, finalités, droits RGPD, cookies et hébergement.',
-      canonicalPath: '/legal/politique-confidentialite.html',
-      output: 'legal/politique-confidentialite.html',
-    },
-    {
-      entryPath: resolve(root, 'src/components/landing/LegalNotice.jsx'),
-      pageTitle: 'Mentions légales — Chaudrel',
-      pageDescription: "Identité de l'éditeur, hébergeur, propriété intellectuelle et droit applicable pour le site chaudrel.be.",
+      entryPath: resolve(root, 'src/components/landing/LegalCombined.jsx'),
+      pageTitle: 'Mentions légales & Confidentialité — Chaudrel',
+      pageDescription: "Identité de l'éditeur, hébergeur, propriété intellectuelle, droit applicable et politique de confidentialité (RGPD) du site chaudrel.be.",
       canonicalPath: '/legal/mentions-legales.html',
       output: 'legal/mentions-legales.html',
+    },
+    {
+      entryPath: resolve(root, 'src/components/landing/LegalCombined.jsx'),
+      pageTitle: 'Mentions légales & Confidentialité — Chaudrel',
+      pageDescription: "Identité de l'éditeur, hébergeur, propriété intellectuelle, droit applicable et politique de confidentialité (RGPD) du site chaudrel.be.",
+      canonicalPath: '/legal/mentions-legales.html',
+      output: 'legal/politique-confidentialite.html',
     },
   ];
 
   for (const page of pages) {
-    const html = buildPage({ ...page, baseHref: '../', indexTemplate: template });
+    const html = buildPage({ ...page, baseHref: '../', template: templateForLegal });
     const outPath = resolve(distDir, page.output);
     mkdirSync(dirname(outPath), { recursive: true });
     writeFileSync(outPath, html);
     const words = html.replace(/<[^>]+>/g, ' ').trim().split(/\s+/).filter(Boolean).length;
-    console.log(`[legal-build] ${page.output} — ${html.length} chars, ~${words} mots`);
+    console.log(`[legal-build] ${page.output} — ${html.length} chars, ~${words} mots, css=${cssHref}`);
   }
   console.log('[legal-build] OK');
 }
