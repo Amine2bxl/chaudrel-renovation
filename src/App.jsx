@@ -12,6 +12,7 @@ import Testimonials from '@/components/landing/Testimonials';
 import FAQ from '@/components/landing/FAQ';
 import CTA from '@/components/landing/CTA';
 import Footer from '@/components/landing/Footer';
+import LegalCombined from '@/components/landing/LegalCombined';
 
 export default function App() {
   return (
@@ -32,6 +33,7 @@ export default function App() {
           <CTA />
         </main>
         <Footer />
+        <LegalCombined />
       </div>
     </MenuProvider>
   );
