@@ -186,107 +186,114 @@ function ContactForm() {
       className="bg-white/5 border border-white/10 rounded-3xl p-5 sm:p-7 lg:p-8 space-y-4 sm:space-y-5"
       noValidate
     >
+      {/* Grille interne 2 col (md+) — garantit une symétrie parfaite sur tablette et PC.
+          Mobile (grid-cols-1) empile proprement. Les blocs uniques traversent 2 col. */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
-        <div>
+        {/* Paire 1 : identité */}
+        <div className="md:col-span-1">
           <label htmlFor="prenom" className={labelClass}>Prénom</label>
           <input id="prenom" name="prenom" type="text" required placeholder="Votre prénom" className={inputClass} />
         </div>
-        <div>
+        <div className="md:col-span-1">
           <label htmlFor="nom" className={labelClass}>Nom</label>
           <input id="nom" name="nom" type="text" required placeholder="Votre nom" className={inputClass} />
         </div>
-      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
-        <div>
+        {/* Paire 2 : contact */}
+        <div className="md:col-span-1">
           <label htmlFor="email" className={labelClass}>Email</label>
           <input id="email" name="email" type="email" required placeholder="votre@email.com" className={inputClass} />
         </div>
-        <div>
+        <div className="md:col-span-1">
           <label htmlFor="telephone" className={labelClass}>Téléphone</label>
           <input id="telephone" name="telephone" type="tel" placeholder="+32 ..." className={inputClass} />
         </div>
-      </div>
 
-      <fieldset className="space-y-4 sm:space-y-5 p-4 sm:p-5 bg-white/[0.03] border border-white/8 rounded-2xl">
-        <legend className="px-2 text-[10px] tracking-[0.18em] uppercase text-brand-goldLight/80 font-semibold">
-          Localisation
-        </legend>
+        {/* Localisation : titre de section, traverse les 2 colonnes */}
+        <fieldset className="md:col-span-2 space-y-4 sm:space-y-5 p-4 sm:p-5 bg-white/[0.03] border border-white/8 rounded-2xl">
+          <legend className="px-2 text-[10px] tracking-[0.18em] uppercase text-brand-goldLight/80 font-semibold">
+            Localisation
+          </legend>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
-          <div>
-            <label htmlFor="code_postal" className={labelClass}>Code postal</label>
-            <input
-              id="code_postal"
-              name="code_postal"
-              type="text"
-              inputMode="numeric"
-              maxLength="10"
-              placeholder="1050"
-              className={inputClass}
-            />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+            <div>
+              <label htmlFor="code_postal" className={labelClass}>Code postal</label>
+              <input
+                id="code_postal"
+                name="code_postal"
+                type="text"
+                inputMode="numeric"
+                maxLength="10"
+                placeholder="1050"
+                className={inputClass}
+              />
+            </div>
+            <div>
+              <label htmlFor="ville" className={labelClass}>Ville</label>
+              <input
+                id="ville"
+                name="ville"
+                type="text"
+                placeholder="Ixelles"
+                className={inputClass}
+              />
+            </div>
+
+            {/* Sélecteur type de bien : à l'intérieur du fieldset, occupe la moitié droite pour rester symétrique */}
+            <div className="md:col-span-2">
+              <label htmlFor="type_bien" className={labelClass}>Type de bien</label>
+              <select
+                id="type_bien"
+                name="type_bien"
+                defaultValue=""
+                className={`${inputClass} appearance-none`}
+              >
+                {PROPERTY_TYPES.map((t) => (
+                  <option key={t.value} value={t.value} className="bg-[#1C1C1C] text-white">
+                    {t.label}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
-          <div>
-            <label htmlFor="ville" className={labelClass}>Ville</label>
-            <input
-              id="ville"
-              name="ville"
-              type="text"
-              placeholder="Ixelles"
-              className={inputClass}
-            />
-          </div>
-        </div>
+        </fieldset>
 
-        <div>
-          <label htmlFor="type_bien" className={labelClass}>Type de bien</label>
-          <select
-            id="type_bien"
-            name="type_bien"
-            defaultValue=""
-            className={`${inputClass} appearance-none`}
-          >
-            {PROPERTY_TYPES.map((t) => (
-              <option key={t.value} value={t.value} className="bg-[#1C1C1C] text-white">
-                {t.label}
+        {/* Type de projet : pleine largeur (2 col) */}
+        <div className="md:col-span-2">
+          <label htmlFor="projet" className={labelClass}>Type de projet</label>
+          <select id="projet" name="projet" required defaultValue="" className={`${inputClass} appearance-none`}>
+            {PROJECT_TYPES.map((p) => (
+              <option key={p.value} value={p.value} className="bg-[#1C1C1C] text-white">
+                {p.label}
               </option>
             ))}
           </select>
         </div>
-      </fieldset>
 
-      <div>
-        <label htmlFor="projet" className={labelClass}>Type de projet</label>
-        <select id="projet" name="projet" required defaultValue="" className={`${inputClass} appearance-none`}>
-          {PROJECT_TYPES.map((p) => (
-            <option key={p.value} value={p.value} className="bg-[#1C1C1C] text-white">
-              {p.label}
-            </option>
-          ))}
-        </select>
+        {/* Message : pleine largeur (2 col) */}
+        <div className="md:col-span-2">
+          <label htmlFor="message" className={labelClass}>Votre projet</label>
+          <textarea
+            id="message"
+            name="message"
+            rows={3}
+            placeholder="Décrivez votre vision..."
+            className={`${inputClass} resize-none`}
+          />
+        </div>
+
+        {/* Bouton : pleine largeur (2 col) */}
+        <button
+          type="submit"
+          className="md:col-span-2 w-full py-3.5 sm:py-4 bg-brand-gold hover:bg-brand-goldLight text-white text-[13px] tracking-[0.15em] uppercase font-semibold rounded-2xl transition-all duration-300 shadow-lg shadow-brand-gold/20"
+        >
+          Envoyer ma demande →
+        </button>
+
+        <p className="md:col-span-2 text-center text-[11px] text-white/25">
+          Consultation gratuite · Réponse sous 24h · Sans engagement
+        </p>
       </div>
-
-      <div>
-        <label htmlFor="message" className={labelClass}>Votre projet</label>
-        <textarea
-          id="message"
-          name="message"
-          rows={3}
-          placeholder="Décrivez votre vision..."
-          className={`${inputClass} resize-none`}
-        />
-      </div>
-
-      <button
-        type="submit"
-        className="w-full py-3.5 sm:py-4 bg-brand-gold hover:bg-brand-goldLight text-white text-[13px] tracking-[0.15em] uppercase font-semibold rounded-2xl transition-all duration-300 shadow-lg shadow-brand-gold/20"
-      >
-        Envoyer ma demande →
-      </button>
-
-      <p className="text-center text-[11px] text-white/25">
-        Consultation gratuite · Réponse sous 24h · Sans engagement
-      </p>
     </form>
   );
 }
