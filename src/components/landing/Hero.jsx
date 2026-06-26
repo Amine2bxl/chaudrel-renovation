@@ -11,13 +11,19 @@ const STATS = [
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex flex-col justify-end overflow-hidden">
+      <h1 className="sr-only">
+        Chaudrel Rénovation — Entreprise de rénovation haut de gamme à Bruxelles et en Belgique
+      </h1>
       <div className="absolute inset-0 hero-kenburns">
         <img
           src={IMAGES.hero}
-          alt="Rénovation haut de gamme à Bruxelles par Chaudrel"
+          alt="Rénovation haut de gamme à Bruxelles par Chaudrel — cuisine, salle de bain, toiture, jardin, piscine"
           className="w-full h-full object-cover"
+          width="1920"
+          height="1080"
           fetchpriority="high"
           loading="eager"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D0D]/90 via-[#0D0D0D]/40 to-[#0D0D0D]/10" />
       </div>
