@@ -13,11 +13,8 @@ const NAV_LINKS = [
 
 function Brand() {
   return (
-    <a
-      href="#top"
-      className="group flex items-center gap-2.5 self-stretch"
-    >
-      <div className="h-11 w-11 rounded-lg bg-white p-0.5 ring-1 ring-brand-gold/30 flex items-center justify-center transition-all duration-500 group-hover:ring-brand-gold/80 group-hover:ring-2 group-hover:shadow-[0_0_0_4px_rgba(216,166,87,0.08)]">
+    <a href="#top" className="flex items-center gap-2.5 group">
+      <div className="h-11 w-11 rounded-lg bg-white p-0.5 ring-1 ring-brand-gold/30 flex items-center justify-center">
         <img
           src={LOGO}
           alt={`${BRAND.name} ${BRAND.tagline}`}
@@ -38,31 +35,14 @@ function Brand() {
   );
 }
 
-/** PC : CTA consultation — premium lift + warm glow au hover. */
+/** PC : CTA consultation. */
 function DesktopCTA() {
   return (
     <a
       href="#contact"
-      className="group/cta ml-1 inline-flex items-center px-5 py-2.5 bg-brand-gold text-white text-[12px] tracking-[0.12em] uppercase font-semibold rounded-full shadow-[0_4px_14px_-4px_rgba(216,166,87,0.55)] hover:bg-[#5E4F34] hover:-translate-y-[1px] hover:shadow-[0_8px_22px_-6px_rgba(216,166,87,0.7)] active:translate-y-0 active:shadow-[0_2px_8px_-2px_rgba(216,166,87,0.5)] transition-all duration-300 ease-out"
+      className="ml-1 px-5 py-2.5 bg-brand-gold text-white text-[12px] tracking-[0.12em] uppercase font-semibold rounded-full hover:bg-[#5E4F34] transition-all duration-300 shadow-lg shadow-brand-gold/20"
     >
       Consultation gratuite
-    </a>
-  );
-}
-
-/** Lien de nav avec underline or premium — le carré glisse depuis le centre. */
-function NavLink({ href, label }) {
-  return (
-    <a
-      href={href}
-      className="group/link relative inline-flex items-center px-4 py-2.5 rounded-full text-[13px] font-medium tracking-wide transition-colors duration-300 text-brand-ink/70 hover:text-brand-gold"
-    >
-      <span>{label}</span>
-      {/* Underline : petit carré or qui glisse du centre vers les côtés au hover. */}
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 -translate-x-1/2 bottom-1.5 h-[2px] w-0 bg-brand-gold rounded-full transition-[width] duration-300 ease-out group-hover/link:w-5"
-      />
     </a>
   );
 }
@@ -109,31 +89,35 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`hidden lg:block fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-brand-gold/15 transition-transform duration-300 will-change-transform ${
+        className={`hidden lg:block fixed top-0 left-0 right-0 z-50 bg-white border-b border-brand-gold/15 transition-transform duration-300 will-change-transform ${
           hidden ? '-translate-y-full' : 'translate-y-0'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-10">
-          {/* Rail unique : 3 colonnes, alignement centré sur l'axe vertical
-              pour que Brand, nav et CTA partagent la même ligne de base visuelle. */}
           <div className="flex items-center justify-between h-14 lg:h-[72px] gap-6">
             {/* Gauche : Brand */}
-            <div className="flex items-center self-stretch">
+            <div className="flex items-center justify-start">
               <Brand />
             </div>
 
-            {/* Centre : navigation principale, réellement centrée sur l'axe X et Y */}
+            {/* Centre : navigation principale, réellement centrée sur l'axe X */}
             <nav
-              className="hidden lg:flex items-center self-stretch"
+              className="hidden lg:flex items-center gap-1"
               aria-label="Navigation principale"
             >
               {NAV_LINKS.map((link) => (
-                <NavLink key={link.href} href={link.href} label={link.label} />
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="px-4 py-2 rounded-full text-[13px] font-medium tracking-wide transition-all duration-200 text-brand-ink/70 hover:bg-brand-gold/10 hover:text-brand-gold"
+                >
+                  {link.label}
+                </a>
               ))}
             </nav>
 
             {/* Droite : CTA — flex-1 + justify-end pour équilibrer la largeur du Brand et garder le centre centré */}
-            <div className="hidden lg:flex flex-1 items-center justify-end gap-3 self-stretch">
+            <div className="hidden lg:flex flex-1 items-center justify-end gap-3">
               <a
                 href={`tel:${BRAND.phones[1].tel}`}
                 aria-label={`Appeler ${BRAND.phones[1].name}`}
