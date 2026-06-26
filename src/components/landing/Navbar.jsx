@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Phone, X } from 'lucide-react';
 import { BRAND, LOGO } from '@/lib/content';
 import { useMenu } from '@/lib/menu-context';
@@ -10,10 +11,14 @@ const NAV_LINKS = [
   { label: 'FAQ', href: '#faq' },
 ];
 
-function Brand() {
+function Brand({ compact = false }) {
   return (
     <a href="#top" className="flex items-center gap-2.5 group">
-      <div className="h-11 w-11 rounded-lg bg-white p-0.5 ring-1 ring-brand-gold/30 flex items-center justify-center">
+      <div
+        className={`rounded-lg bg-white p-0.5 ring-1 ring-brand-gold/30 flex items-center justify-center transition-all duration-300 ${
+          compact ? 'h-9 w-9' : 'h-11 w-11'
+        }`}
+      >
         <img
           src={LOGO}
           alt={`${BRAND.name} ${BRAND.tagline}`}
@@ -23,10 +28,18 @@ function Brand() {
         />
       </div>
       <span className="flex flex-col leading-none">
-        <span className="font-display text-lg lg:text-xl tracking-[0.1em] font-semibold text-brand-ink">
+        <span
+          className={`font-display tracking-[0.1em] font-semibold text-brand-ink transition-all duration-300 ${
+            compact ? 'text-base lg:text-lg' : 'text-lg lg:text-xl'
+          }`}
+        >
           {BRAND.name.toUpperCase()}
         </span>
-        <span className="text-[9px] tracking-[0.2em] uppercase text-brand-gold font-medium">
+        <span
+          className={`text-[9px] tracking-[0.2em] uppercase text-brand-gold font-medium transition-all duration-200 overflow-hidden ${
+            compact ? 'max-h-0 opacity-0' : 'max-h-4 opacity-100'
+          }`}
+        >
           {BRAND.tagline}
         </span>
       </span>
@@ -48,13 +61,31 @@ function DesktopCTA() {
 
 export default function Navbar() {
   const { open: mobileOpen, close: closeMenu } = useMenu();
+  // PC only : la navbar se replie (shrink) quand on scrolle vers le bas.
+  // N'a aucun effet sur la vue mobile/tablette.
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
     <>
-      <header className="hidden lg:block fixed top-0 left-0 right-0 z-50 bg-white border-b border-brand-gold/15 shadow-sm">
+      <header
+        className={`hidden lg:block fixed top-0 left-0 right-0 z-50 bg-white border-b border-brand-gold/15 transition-all duration-300 ${
+          scrolled ? 'shadow-md' : 'shadow-sm'
+        }`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-10">
-          <div className="flex items-center justify-between h-14 lg:h-[72px]">
-            <Brand />
+          <div
+            className={`flex items-center justify-between transition-all duration-300 ${
+              scrolled ? 'h-14' : 'h-14 lg:h-[72px]'
+            }`}
+          >
+            <Brand compact={scrolled} />
 
             <nav
               className="hidden lg:flex items-center gap-1"
