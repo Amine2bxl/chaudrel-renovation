@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Phone, X } from 'lucide-react';
 import { BRAND, LOGO } from '@/lib/content';
@@ -49,27 +48,11 @@ function DesktopCTA() {
 }
 
 export default function Navbar() {
-  const [visible, setVisible] = useState(true);
-  const [lastY, setLastY] = useState(0);
   const { open: mobileOpen, close: closeMenu } = useMenu();
-
-  useEffect(() => {
-    const onScroll = () => {
-      const y = window.scrollY;
-      setVisible(y < 60 || y < lastY);
-      setLastY(y);
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, [lastY]);
 
   return (
     <>
-      <motion.header
-        animate={{ y: visible ? 0 : -64 }}
-        transition={{ duration: 0.3, ease: 'easeInOut' }}
-        className={`hidden lg:block fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white border-b border-brand-gold/15 shadow-sm`}
-      >
+      <header className="hidden lg:block fixed top-0 left-0 right-0 z-50 bg-white border-b border-brand-gold/15 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-10">
           <div className="flex items-center justify-between h-14 lg:h-[72px]">
             <Brand />
@@ -102,7 +85,7 @@ export default function Navbar() {
             </div>
           </div>
         </div>
-      </motion.header>
+      </header>
 
       {/* Feuille de menu mobile/tablette — déclenchée depuis MobileBar */}
       <AnimatePresence>

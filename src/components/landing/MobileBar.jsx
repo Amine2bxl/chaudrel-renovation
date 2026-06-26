@@ -7,10 +7,9 @@ import { useMenu } from '@/lib/menu-context';
  * MobileBar — barre de navigation affichée UNIQUEMENT sur mobile et tablette.
  * Cachée sur PC (lg:hidden).
  *
- * Layout (gauche → droite) :
- *  - Logo (lien vers le haut)
- *  - 2 boutons d'action : Appeler + Email (visibles sm+, masqués en très petit)
- *  - Bouton hamburger qui ouvre le menu principal
+ * Layout symétrique (gauche → droite) :
+ *  - Bloc gauche : Logo + nom de marque (équilibré)
+ *  - Bloc droit : Appeler | Email | Menu (3 actions identiques en taille)
  *
  * Verrouille le scroll du body quand le menu est ouvert.
  */
@@ -37,41 +36,39 @@ export default function MobileBar() {
       role="toolbar"
       aria-label="Actions rapides"
     >
-      <div className="max-w-screen-sm mx-auto px-3 flex items-center justify-between gap-2 h-14">
+      <div className="max-w-screen-sm mx-auto px-4 flex items-center justify-between gap-3 h-14">
         <a
           href="#top"
           aria-label={`${BRAND.name} ${BRAND.tagline} — retour en haut`}
-          className="flex items-center gap-2 group"
+          className="flex items-center gap-2.5 group min-w-0"
         >
-          <div className="h-9 w-9 rounded-lg bg-white p-0.5 ring-1 ring-brand-gold/30 flex items-center justify-center flex-shrink-0">
+          <div className="h-10 w-10 rounded-lg bg-white p-0.5 ring-1 ring-brand-gold/30 flex items-center justify-center flex-shrink-0">
             <img src={LOGO} alt="" className="h-full w-full object-contain" />
           </div>
-          <span className="flex flex-col leading-none">
-            <span className="font-display text-[15px] tracking-[0.1em] font-semibold text-brand-ink">
+          <span className="flex flex-col leading-none min-w-0">
+            <span className="font-display text-[15px] tracking-[0.1em] font-semibold text-brand-ink truncate">
               {BRAND.name.toUpperCase()}
             </span>
-            <span className="text-[8px] tracking-[0.2em] uppercase text-brand-gold font-medium mt-0.5">
+            <span className="text-[8px] tracking-[0.2em] uppercase text-brand-gold font-medium mt-0.5 truncate">
               {BRAND.tagline}
             </span>
           </span>
         </a>
 
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-2 flex-shrink-0">
           <a
             href={`tel:${BRAND.phones[1].tel}`}
             aria-label={`Appeler ${BRAND.phones[1].name}`}
-            className="flex h-10 w-10 sm:w-auto sm:px-3 sm:gap-1.5 items-center justify-center rounded-full bg-brand-gold text-white text-[12px] font-semibold tracking-wide shadow-md shadow-brand-gold/25 active:scale-95 transition-transform"
+            className="h-10 w-10 flex items-center justify-center rounded-full bg-brand-gold text-white shadow-md shadow-brand-gold/25 active:scale-95 transition-transform"
           >
             <Phone className="w-4 h-4" aria-hidden="true" />
-            <span className="hidden sm:inline">Appeler</span>
           </a>
           <a
             href={`mailto:${BRAND.email}`}
             aria-label="Envoyer un email"
-            className="flex h-10 w-10 sm:w-auto sm:px-3 sm:gap-1.5 items-center justify-center rounded-full bg-brand-cream text-brand-ink text-[12px] font-semibold tracking-wide border border-brand-gold/30 active:scale-95 transition-transform"
+            className="h-10 w-10 flex items-center justify-center rounded-full bg-brand-cream text-brand-ink border border-brand-gold/30 active:scale-95 transition-transform"
           >
             <Mail className="w-4 h-4 text-brand-gold" aria-hidden="true" />
-            <span className="hidden sm:inline">Email</span>
           </a>
           <button
             onClick={() => setOpen((v) => !v)}
