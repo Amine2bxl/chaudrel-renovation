@@ -94,9 +94,13 @@ export default function Navbar() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-10">
-          <div className="flex items-center justify-between h-14 lg:h-[72px]">
-            <Brand />
+          <div className="grid grid-cols-[1fr_auto_1fr] items-center h-14 lg:h-[72px] gap-4">
+            {/* Gauche : Brand */}
+            <div className="flex items-center justify-start">
+              <Brand />
+            </div>
 
+            {/* Centre : navigation principale, alignée en haut sur l'axe Y */}
             <nav
               className="hidden lg:flex items-center gap-1"
               aria-label="Navigation principale"
@@ -112,7 +116,8 @@ export default function Navbar() {
               ))}
             </nav>
 
-            <div className="hidden lg:flex items-center gap-3">
+            {/* Droite : CTA */}
+            <div className="hidden lg:flex items-center justify-end gap-3">
               <a
                 href={`tel:${BRAND.phones[1].tel}`}
                 aria-label={`Appeler ${BRAND.phones[1].name}`}

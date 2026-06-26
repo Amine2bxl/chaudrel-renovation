@@ -1,4 +1,5 @@
 import Reveal from '@/lib/reveal';
+import { ChevronDown } from 'lucide-react';
 
 const FAQS = [
   {
@@ -50,12 +51,10 @@ export default function FAQ() {
             >
               <summary className="flex items-center justify-between gap-4 cursor-pointer list-none font-body text-[15px] font-medium text-brand-ink hover:text-brand-gold transition-colors">
                 <span>{faq.q}</span>
-                <span
+                <ChevronDown
                   aria-hidden="true"
-                  className="w-6 h-6 rounded-full border border-brand-gold/25 flex items-center justify-center text-brand-gold text-sm font-light group-open:rotate-45 transition-transform duration-200"
-                >
-                  +
-                </span>
+                  className="w-5 h-5 text-brand-gold/70 group-open:rotate-180 transition-transform duration-200 flex-shrink-0"
+                />
               </summary>
               <p className="mt-3 text-[14px] text-brand-ink/55 font-light leading-[1.8]">
                 {faq.a}
