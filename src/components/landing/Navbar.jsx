@@ -94,13 +94,13 @@ export default function Navbar() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-10">
-          <div className="grid grid-cols-[1fr_auto_1fr] items-center h-14 lg:h-[72px] gap-4">
+          <div className="flex items-center justify-between h-14 lg:h-[72px] gap-6">
             {/* Gauche : Brand */}
             <div className="flex items-center justify-start">
               <Brand />
             </div>
 
-            {/* Centre : navigation principale, alignée en haut sur l'axe Y */}
+            {/* Centre : navigation principale, réellement centrée sur l'axe X */}
             <nav
               className="hidden lg:flex items-center gap-1"
               aria-label="Navigation principale"
@@ -116,12 +116,12 @@ export default function Navbar() {
               ))}
             </nav>
 
-            {/* Droite : CTA */}
-            <div className="hidden lg:flex items-center justify-end gap-3">
+            {/* Droite : CTA — flex-1 + justify-end pour équilibrer la largeur du Brand et garder le centre centré */}
+            <div className="hidden lg:flex flex-1 items-center justify-end gap-3">
               <a
                 href={`tel:${BRAND.phones[1].tel}`}
                 aria-label={`Appeler ${BRAND.phones[1].name}`}
-                className="ml-1 flex items-center gap-2 px-4 py-2.5 bg-white text-brand-ink text-[12px] tracking-[0.12em] uppercase font-semibold rounded-full border border-brand-gold/30 hover:bg-brand-gold/10 hover:border-brand-gold/60 transition-all duration-300"
+                className="flex items-center gap-2 px-4 py-2.5 bg-white text-brand-ink text-[12px] tracking-[0.12em] uppercase font-semibold rounded-full border border-brand-gold/30 hover:bg-brand-gold/10 hover:border-brand-gold/60 transition-all duration-300"
               >
                 <Phone className="w-4 h-4 text-brand-gold" aria-hidden="true" />
                 <span>Appeler</span>
