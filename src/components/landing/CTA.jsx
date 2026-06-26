@@ -33,22 +33,22 @@ export default function CTA() {
               Consultation gratuite et sans engagement. Nous nous déplaçons chez vous pour évaluer votre projet et vous accompagner de A à Z.
             </p>
 
-            <div className="space-y-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
               {BRAND.phones.map(({ name, number, tel }) => (
                 <a
                   key={name}
                   href={`tel:${tel}`}
-                  className="flex items-center gap-4 group p-4 bg-white/5 hover:bg-white/10 border border-white/8 hover:border-brand-gold/30 rounded-2xl transition-all duration-300"
+                  className="flex items-center gap-4 group p-4 bg-white/5 hover:bg-white/10 border border-white/8 hover:border-brand-gold/30 rounded-2xl transition-all duration-300 min-h-[76px]"
                 >
                   <div className="w-10 h-10 rounded-xl bg-brand-gold/20 flex items-center justify-center flex-shrink-0 group-hover:bg-brand-gold/30 transition-colors duration-300">
                     <Phone className="w-4 h-4 text-brand-gold" aria-hidden="true" />
                   </div>
-                  <div className="flex-1">
+                  <div className="flex-1 min-w-0">
                     <p className="text-[10px] tracking-[0.15em] uppercase text-white/30 font-medium">{name}</p>
-                    <p className="text-white font-light mt-0.5">{number}</p>
+                    <p className="text-white font-light mt-0.5 truncate">{number}</p>
                   </div>
                   <ArrowRight
-                    className="w-4 h-4 text-white/20 group-hover:text-brand-gold group-hover:translate-x-1 transition-all duration-300"
+                    className="w-4 h-4 text-white/20 group-hover:text-brand-gold group-hover:translate-x-1 transition-all duration-300 flex-shrink-0"
                     aria-hidden="true"
                   />
                 </a>
@@ -56,28 +56,28 @@ export default function CTA() {
 
               <a
                 href={`mailto:${BRAND.email}`}
-                className="flex items-center gap-4 group p-4 bg-white/5 hover:bg-white/10 border border-white/8 hover:border-brand-gold/30 rounded-2xl transition-all duration-300"
+                className="flex items-center gap-4 group p-4 bg-white/5 hover:bg-white/10 border border-white/8 hover:border-brand-gold/30 rounded-2xl transition-all duration-300 min-h-[76px] md:col-span-1"
               >
                 <div className="w-10 h-10 rounded-xl bg-brand-gold/20 flex items-center justify-center flex-shrink-0 group-hover:bg-brand-gold/30 transition-colors duration-300">
                   <Mail className="w-4 h-4 text-brand-gold" aria-hidden="true" />
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 min-w-0">
                   <p className="text-[10px] tracking-[0.15em] uppercase text-white/30 font-medium">Email</p>
-                  <p className="text-white font-light mt-0.5">{BRAND.email}</p>
+                  <p className="text-white font-light mt-0.5 truncate">{BRAND.email}</p>
                 </div>
                 <ArrowRight
-                  className="w-4 h-4 text-white/20 group-hover:text-brand-gold group-hover:translate-x-1 transition-all duration-300"
+                  className="w-4 h-4 text-white/20 group-hover:text-brand-gold group-hover:translate-x-1 transition-all duration-300 flex-shrink-0"
                   aria-hidden="true"
                 />
               </a>
 
-              <div className="flex items-center gap-4 p-4 bg-white/5 border border-white/8 rounded-2xl">
+              <div className="flex items-center gap-4 p-4 bg-white/5 border border-white/8 rounded-2xl min-h-[76px] md:col-span-1">
                 <div className="w-10 h-10 rounded-xl bg-brand-gold/20 flex items-center justify-center flex-shrink-0">
                   <MapPin className="w-4 h-4 text-brand-gold" aria-hidden="true" />
                 </div>
-                <div>
+                <div className="flex-1 min-w-0">
                   <p className="text-[10px] tracking-[0.15em] uppercase text-white/30 font-medium">Zone d'intervention</p>
-                  <p className="text-white font-light mt-0.5">{BRAND.zone}</p>
+                  <p className="text-white font-light mt-0.5 truncate">{BRAND.zone}</p>
                 </div>
               </div>
             </div>
