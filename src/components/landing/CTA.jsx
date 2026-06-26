@@ -181,7 +181,7 @@ function ContactForm() {
       className="bg-white/5 border border-white/10 rounded-3xl p-5 sm:p-7 lg:p-8 space-y-4 sm:space-y-5"
       noValidate
     >
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
         <div>
           <label htmlFor="prenom" className={labelClass}>Prénom</label>
           <input id="prenom" name="prenom" type="text" required placeholder="Votre prénom" className={inputClass} />
@@ -192,7 +192,7 @@ function ContactForm() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
         <div>
           <label htmlFor="email" className={labelClass}>Email</label>
           <input id="email" name="email" type="email" required placeholder="votre@email.com" className={inputClass} />
@@ -208,8 +208,8 @@ function ContactForm() {
           Localisation
         </legend>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
-          <div className="lg:col-span-1">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+          <div>
             <label htmlFor="code_postal" className={labelClass}>Code postal</label>
             <input
               id="code_postal"
@@ -221,7 +221,7 @@ function ContactForm() {
               className={inputClass}
             />
           </div>
-          <div className="lg:col-span-2">
+          <div>
             <label htmlFor="ville" className={labelClass}>Ville</label>
             <input
               id="ville"
