@@ -11,14 +11,10 @@ const NAV_LINKS = [
   { label: 'FAQ', href: '#faq' },
 ];
 
-function Brand({ compact = false }) {
+function Brand() {
   return (
     <a href="#top" className="flex items-center gap-2.5 group">
-      <div
-        className={`rounded-lg bg-white p-0.5 ring-1 ring-brand-gold/30 flex items-center justify-center transition-all duration-300 ${
-          compact ? 'h-9 w-9' : 'h-11 w-11'
-        }`}
-      >
+      <div className="h-11 w-11 rounded-lg bg-white p-0.5 ring-1 ring-brand-gold/30 flex items-center justify-center">
         <img
           src={LOGO}
           alt={`${BRAND.name} ${BRAND.tagline}`}
@@ -28,18 +24,10 @@ function Brand({ compact = false }) {
         />
       </div>
       <span className="flex flex-col leading-none">
-        <span
-          className={`font-display tracking-[0.1em] font-semibold text-brand-ink transition-all duration-300 ${
-            compact ? 'text-base lg:text-lg' : 'text-lg lg:text-xl'
-          }`}
-        >
+        <span className="font-display tracking-[0.1em] font-semibold text-brand-ink text-lg lg:text-xl">
           {BRAND.name.toUpperCase()}
         </span>
-        <span
-          className={`text-[9px] tracking-[0.2em] uppercase text-brand-gold font-medium transition-all duration-200 overflow-hidden ${
-            compact ? 'max-h-0 opacity-0' : 'max-h-4 opacity-100'
-          }`}
-        >
+        <span className="text-[9px] tracking-[0.2em] uppercase text-brand-gold font-medium">
           {BRAND.tagline}
         </span>
       </span>
@@ -61,13 +49,39 @@ function DesktopCTA() {
 
 export default function Navbar() {
   const { open: mobileOpen, close: closeMenu } = useMenu();
-  // PC only : la navbar se replie (shrink) quand on scrolle vers le bas.
-  // N'a aucun effet sur la vue mobile/tablette.
-  const [scrolled, setScrolled] = useState(false);
+  // PC only : la navbar se cache quand on scrolle vers le bas,
+  // réapparaît quand on remonte. Aucun effet sur mobile/tablette.
+  const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    onScroll();
+    let lastY = window.scrollY;
+    let ticking = false;
+
+    const update = () => {
+      const y = window.scrollY;
+      const delta = y - lastY;
+
+      // Tolérance en haut de page : toujours visible.
+      if (y < 40) {
+        setHidden(false);
+      } else if (delta > 4) {
+        // scroll down → cache
+        setHidden(true);
+      } else if (delta < -4) {
+        // scroll up → réaffiche
+        setHidden(false);
+      }
+      lastY = y;
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    };
+
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -75,17 +89,13 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`hidden lg:block fixed top-0 left-0 right-0 z-50 bg-white border-b border-brand-gold/15 transition-all duration-300 ${
-          scrolled ? 'shadow-md' : 'shadow-sm'
+        className={`hidden lg:block fixed top-0 left-0 right-0 z-50 bg-white border-b border-brand-gold/15 transition-transform duration-300 will-change-transform ${
+          hidden ? '-translate-y-full' : 'translate-y-0'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-10">
-          <div
-            className={`flex items-center justify-between transition-all duration-300 ${
-              scrolled ? 'h-14' : 'h-14 lg:h-[72px]'
-            }`}
-          >
-            <Brand compact={scrolled} />
+          <div className="flex items-center justify-between h-14 lg:h-[72px]">
+            <Brand />
 
             <nav
               className="hidden lg:flex items-center gap-1"
