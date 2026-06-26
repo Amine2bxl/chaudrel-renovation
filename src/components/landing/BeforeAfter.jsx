@@ -1,5 +1,4 @@
 import { useState, useRef, useCallback } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
 import { MoveHorizontal, ChevronLeft, ChevronRight } from 'lucide-react';
 import { IMAGES } from '@/lib/content';
 
@@ -120,17 +119,9 @@ export default function BeforeAfter() {
           </div>
         </div>
 
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={project.id}
-            initial={{ opacity: 0, scale: 0.99 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.99 }}
-            transition={{ duration: 0.35 }}
-          >
-            <Slider {...project} />
-          </motion.div>
-        </AnimatePresence>
+        <div key={project.id} className="ba-slide">
+          <Slider {...project} />
+        </div>
 
         <div className="flex justify-center gap-2 mt-5" role="tablist" aria-label="Sélecteur de projet">
           {PROJECTS.map((_, i) => (

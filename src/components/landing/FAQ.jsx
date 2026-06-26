@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import Reveal from '@/lib/reveal';
 
 const FAQS = [
   {
@@ -31,13 +31,7 @@ export default function FAQ() {
   return (
     <section id="faq" className="py-10 md:py-14 lg:py-32 bg-brand-cream">
       <div className="max-w-3xl mx-auto px-5 lg:px-10">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.7 }}
-          className="text-center mb-6 lg:mb-14"
-        >
+        <Reveal className="text-center mb-6 lg:mb-14">
           <p className="text-[11px] tracking-[0.25em] uppercase text-brand-gold font-semibold mb-3">
             Questions Fréquentes
           </p>
@@ -46,15 +40,9 @@ export default function FAQ() {
             <br />
             <span className="italic text-brand-gold">Devez Savoir</span>
           </h2>
-        </motion.div>
+        </Reveal>
 
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="bg-white rounded-3xl border border-brand-gold/10 overflow-hidden shadow-sm divide-y divide-brand-gold/10"
-        >
+        <Reveal from="fade" className="bg-white rounded-3xl border border-brand-gold/10 overflow-hidden shadow-sm divide-y divide-brand-gold/10">
           {FAQS.map((faq, i) => (
             <details
               key={i}
@@ -74,7 +62,7 @@ export default function FAQ() {
               </p>
             </details>
           ))}
-        </motion.div>
+        </Reveal>
       </div>
     </section>
   );

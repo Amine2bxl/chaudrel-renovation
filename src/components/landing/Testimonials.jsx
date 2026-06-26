@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
 import { Star } from 'lucide-react';
+import Reveal from '@/lib/reveal';
 
 const TESTIMONIALS = [
   {
@@ -79,12 +79,7 @@ export default function Testimonials() {
     <section id="testimonials" className="py-10 md:py-14 lg:py-32 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-5 lg:px-10">
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-6 lg:mb-14 gap-4 lg:gap-6">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
+          <Reveal>
             <p className="text-[11px] tracking-[0.25em] uppercase text-brand-gold font-semibold mb-3">
               Avis Clients
             </p>
@@ -93,40 +88,35 @@ export default function Testimonials() {
               <br />
               <span className="italic text-brand-gold">Nos Clients</span>
             </h2>
-          </motion.div>
+          </Reveal>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="flex items-center gap-5 bg-brand-cream rounded-2xl px-6 py-5 border border-brand-gold/10"
-          >
-            <div className="text-center">
-              <p className="font-display text-4xl font-light text-brand-ink">5.0</p>
-              <Stars />
-              <p className="text-[10px] tracking-[0.12em] uppercase text-brand-ink/40 font-medium mt-1.5">
-                Note moyenne
-              </p>
+          <Reveal from="fade">
+            <div className="flex items-center gap-5 bg-brand-cream rounded-2xl px-6 py-5 border border-brand-gold/10">
+              <div className="text-center">
+                <p className="font-display text-4xl font-light text-brand-ink">5.0</p>
+                <Stars />
+                <p className="text-[10px] tracking-[0.12em] uppercase text-brand-ink/40 font-medium mt-1.5">
+                  Note moyenne
+                </p>
+              </div>
+              <div className="w-px h-14 bg-brand-gold/15" aria-hidden="true" />
+              <div className="text-center">
+                <p className="font-display text-4xl font-light text-brand-ink">150+</p>
+                <p className="text-[10px] tracking-[0.12em] uppercase text-brand-ink/40 font-medium mt-1.5">
+                  Projets réalisés
+                </p>
+              </div>
             </div>
-            <div className="w-px h-14 bg-brand-gold/15" aria-hidden="true" />
-            <div className="text-center">
-              <p className="font-display text-4xl font-light text-brand-ink">150+</p>
-              <p className="text-[10px] tracking-[0.12em] uppercase text-brand-ink/40 font-medium mt-1.5">
-                Projets réalisés
-              </p>
-            </div>
-          </motion.div>
+          </Reveal>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4">
           {TESTIMONIALS.map((t, i) => (
-            <motion.article
+            <Reveal
+              as="article"
               key={t.name}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-30px' }}
-              transition={{ delay: i * 0.07, duration: 0.6 }}
+              delay={i * 70}
+              margin="-30px"
               className="bg-brand-cream hover:bg-white border border-brand-gold/0 hover:border-brand-gold/12 hover:shadow-lg rounded-2xl p-4 sm:p-6 transition-all duration-400"
             >
               <div className="flex items-center justify-between mb-4">
@@ -155,24 +145,18 @@ export default function Testimonials() {
                   {t.project}
                 </span>
               </footer>
-            </motion.article>
+            </Reveal>
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mt-10 text-center"
-        >
+        <Reveal from="fade" className="mt-10 text-center">
           <a
             href="#contact"
             className="inline-flex items-center gap-2 px-7 py-3.5 bg-brand-ink text-white text-[13px] tracking-[0.1em] uppercase font-semibold rounded-full hover:bg-brand-gold transition-all duration-300"
           >
             Rejoignez nos clients satisfaits
           </a>
-        </motion.div>
+        </Reveal>
       </div>
     </section>
   );

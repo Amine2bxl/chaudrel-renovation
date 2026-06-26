@@ -93,3 +93,71 @@ body { overflow-x: hidden; }
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Menu mobile — animation CSS pure (remplace framer-motion) */
+@keyframes mm-fade-in {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.mm-overlay {
+  animation: mm-fade-in 0.22s ease-out both;
+}
+@keyframes mm-link-in {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.mm-link {
+  animation: mm-link-in 0.32s ease-out both;
+}
+
+/* BeforeAfter — transition de slide CSS */
+@keyframes ba-fade-in {
+  from { opacity: 0; transform: scale(0.99); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.ba-slide {
+  animation: ba-fade-in 0.35s ease-out both;
+}
+
+/* Reveal — animations au scroll (remplace framer-motion whileInView) */
+.rv {
+  opacity: 0;
+  transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.rv-up    { transform: translateY(24px); }
+.rv-down  { transform: translateY(-24px); }
+.rv-left  { transform: translateX(-24px); }
+.rv-right { transform: translateX(24px); }
+.rv-fade  { transform: none; }
+.rv.is-visible {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Hero — kenburns + fade-in échelonnés (remplace framer-motion animate) */
+@keyframes hero-kenburns {
+  from { transform: scale(1.08); }
+  to   { transform: scale(1); }
+}
+.hero-kenburns {
+  animation: hero-kenburns 2s ease-out both;
+}
+@keyframes hero-fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-fade {
+  opacity: 0;
+  animation: hero-fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.hero-d1 { animation-delay: 0.4s; }
+.hero-d2 { animation-delay: 0.6s; }
+.hero-d3 { animation-delay: 0.9s; }
+.hero-d4 { animation-delay: 1.2s; }
+.hero-d5 { animation-delay: 1.6s; }
+
+/* Accessibilité : reveal doit s'afficher immédiatement si l'utilisateur préfère moins d'animations */
+@media (prefers-reduced-motion: reduce) {
+  .rv { opacity: 1 !important; transform: none !important; }
+}

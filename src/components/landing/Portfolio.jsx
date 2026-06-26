@@ -1,18 +1,12 @@
-import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { IMAGES } from '@/lib/content';
+import Reveal from '@/lib/reveal';
 
 export default function Portfolio() {
   return (
     <section id="portfolio" className="py-10 md:py-14 lg:py-36 bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.7 }}
-          className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-10 lg:mb-24 gap-6"
-        >
+        <Reveal className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-10 lg:mb-24 gap-6">
           <div>
             <div className="flex items-center gap-4 mb-6">
               <div className="w-12 h-px bg-brand-gold" aria-hidden="true" />
@@ -30,16 +24,14 @@ export default function Portfolio() {
             Découvrez une sélection de nos rénovations réalisées à Bruxelles et ses environs.
             Chaque chantier est mené avec rigueur, passion et un souci du détail absolu.
           </p>
-        </motion.div>
+        </Reveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6">
           {IMAGES.portfolio.map((project, i) => (
-            <motion.figure
+            <Reveal
               key={project.title}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ delay: i * 0.12, duration: 0.7 }}
+              delay={i * 120}
+              margin="-60px"
               className={`${project.span} group relative overflow-hidden`}
             >
               <div className={`${project.aspect} overflow-hidden bg-brand-cream`}>
@@ -60,7 +52,7 @@ export default function Portfolio() {
                   </div>
                 </figcaption>
               </div>
-            </motion.figure>
+            </Reveal>
           ))}
         </div>
       </div>

@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
 import { Shield, Clock, Gem, Users, Ruler, Leaf } from 'lucide-react';
+import Reveal from '@/lib/reveal';
 
 const BENEFITS = [
   {
@@ -34,26 +34,11 @@ const BENEFITS = [
   },
 ];
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: (i) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.08, duration: 0.6 },
-  }),
-};
-
 export default function Benefits() {
   return (
     <section id="benefits" className="py-10 md:py-14 lg:py-32 bg-brand-dark">
       <div className="max-w-7xl mx-auto px-5 lg:px-10">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.7 }}
-          className="text-center mb-6 lg:mb-20"
-        >
+        <Reveal className="text-center mb-6 lg:mb-20">
           <p className="text-[11px] tracking-[0.25em] uppercase text-brand-gold font-semibold mb-4">
             Pourquoi Chaudrel
           </p>
@@ -62,17 +47,14 @@ export default function Benefits() {
             <br />
             <span className="italic text-brand-goldLight">de Votre Vision</span>
           </h2>
-        </motion.div>
+        </Reveal>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {BENEFITS.map((b, i) => (
-            <motion.article
+            <Reveal
+              as="article"
               key={b.title}
-              custom={i}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-40px' }}
-              variants={cardVariants}
+              delay={i * 80}
               className="group bg-white/5 hover:bg-white/10 border border-white/10 hover:border-brand-gold/30 rounded-2xl p-5 sm:p-7 transition-all duration-300"
             >
               <div className="w-10 h-10 rounded-xl bg-brand-gold/15 flex items-center justify-center mb-5 group-hover:bg-brand-gold/25 transition-colors duration-300">
@@ -80,7 +62,7 @@ export default function Benefits() {
               </div>
               <h3 className="font-display text-lg font-light text-white mb-2">{b.title}</h3>
               <p className="text-[13px] text-white/40 font-light leading-relaxed">{b.desc}</p>
-            </motion.article>
+            </Reveal>
           ))}
         </div>
       </div>

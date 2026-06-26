@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { IMAGES, BRAND } from '@/lib/content';
+import Reveal from '@/lib/reveal';
 
 const TIMELINE = [
   { year: '2009', event: 'Fondation à Bruxelles par Alberto & Matteo' },
@@ -13,13 +13,7 @@ export default function Story() {
     <section id="story" className="py-10 md:py-14 lg:py-32 bg-brand-cream">
       <div className="max-w-7xl mx-auto px-5 lg:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.8 }}
-            className="relative order-2 lg:order-1"
-          >
+          <Reveal from="left" className="relative order-2 lg:order-1">
             <div className="rounded-3xl overflow-hidden aspect-[4/5] bg-white">
               <img
                 src={IMAGES.story}
@@ -28,27 +22,15 @@ export default function Story() {
                 loading="lazy"
               />
             </div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="absolute -bottom-6 -right-4 lg:-right-8 bg-white rounded-2xl p-5 shadow-xl border border-brand-gold/10"
-            >
+            <Reveal delay={400} className="absolute -bottom-6 -right-4 lg:-right-8 bg-white rounded-2xl p-5 shadow-xl border border-brand-gold/10">
               <p className="font-display text-4xl font-light text-brand-gold">100%</p>
               <p className="text-[11px] tracking-[0.15em] uppercase text-brand-ink/50 font-medium mt-1">
                 Engagement Qualité
               </p>
-            </motion.div>
-          </motion.div>
+            </Reveal>
+          </Reveal>
 
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.8 }}
-            className="order-1 lg:order-2"
-          >
+          <Reveal from="right" className="order-1 lg:order-2">
             <p className="text-[11px] tracking-[0.25em] uppercase text-brand-gold font-semibold mb-4">
               Notre Histoire
             </p>
@@ -66,17 +48,15 @@ export default function Story() {
 
             <div className="space-y-3 mb-8">
               {TIMELINE.map((t, i) => (
-                <motion.div
+                <Reveal
                   key={t.year}
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1, duration: 0.5 }}
+                  from="right"
+                  delay={i * 100}
                   className="flex items-center gap-4 bg-white rounded-xl p-4 border border-brand-gold/8"
                 >
                   <span className="font-display text-lg font-semibold text-brand-gold w-12 flex-shrink-0">{t.year}</span>
                   <span className="text-[13px] text-brand-ink/65 font-light">{t.event}</span>
-                </motion.div>
+                </Reveal>
               ))}
             </div>
 
@@ -84,7 +64,7 @@ export default function Story() {
               Discutons de votre projet
               <ArrowRight className="w-4 h-4" aria-hidden="true" />
             </a>
-          </motion.div>
+          </Reveal>
         </div>
       </div>
     </section>

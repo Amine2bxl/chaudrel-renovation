@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, ArrowRight } from 'lucide-react';
 import { BRAND } from '@/lib/content';
+import Reveal from '@/lib/reveal';
 
 export default function CTA() {
   return (
@@ -13,11 +13,13 @@ export default function CTA() {
 
       <div className="relative max-w-7xl mx-auto px-5 lg:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.7 }}
+          <div
+            className="reveal reveal-left"
+            data-reveal="opacity: 0; y: 24px"
+            data-reveal-end="opacity: 1; y: 0px"
+            data-reveal-once="true"
+            data-reveal-margin="-60px"
+            data-reveal-duration="0.7"
           >
             <p className="text-[11px] tracking-[0.25em] uppercase text-brand-gold font-semibold mb-4">
               Démarrer Votre Projet
@@ -79,16 +81,19 @@ export default function CTA() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ delay: 0.15, duration: 0.7 }}
+          <div
+            className="reveal reveal-left"
+            data-reveal="opacity: 0; y: 24px"
+            data-reveal-end="opacity: 1; y: 0px"
+            data-reveal-once="true"
+            data-reveal-margin="-60px"
+            data-reveal-delay="0.15"
+            data-reveal-duration="0.7"
           >
             <ContactForm />
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
