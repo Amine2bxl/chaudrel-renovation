@@ -4,9 +4,9 @@ import { useMenu } from '@/lib/menu-context';
 
 const NAV_LINKS = [
   { label: 'Services', href: '#services' },
-  { label: 'Réalisations', href: '#portfolio' },
-  { label: 'Notre Histoire', href: '#story' },
-  { label: 'Avis Clients', href: '#testimonials' },
+  { label: 'Réalisations', href: '#réalisations' },
+  { label: 'Notre Histoire', href: '#notre Histoire' },
+  { label: 'Avis Clients', href: '#avis Clients' },
   { label: 'FAQ', href: '#faq' },
 ];
 
