@@ -24,7 +24,7 @@ export const BRAND = {
 
 // Logo officiel Chaudrel (fichier dans /public, versionné dans Git).
 // Chemin absolu servi par Vite depuis le dossier public/.
-export const LOGO = '/chaudrel-logo.jpg';
+export const LOGO = '/chaudrel-logo.webp';
 
 export const IMAGES = {
   hero: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80',
@@ -141,5 +141,5 @@ export const IMAGES = {
       aspect: 'aspect-[3/2]',
     },
   ],
-  story: '/story-before-after.jpg',
+  story: '/story-before-after.webp',
 };
