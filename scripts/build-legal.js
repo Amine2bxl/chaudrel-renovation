@@ -133,7 +133,7 @@ function main() {
 
   const pages = [
     {
-      entryPath: resolve(root, 'src/components/landing/LegalCombined.jsx'),
+      entryPath: resolve(root, 'src/components/sections/LegalCombined.jsx'),
       pageTitle: 'Politiques & Mentions légales — Chaudrel',
       pageDescription: "Identité officielle de Chaudrel Rénovation SRL (BCE / BNB), hébergeur, propriété intellectuelle, et politique de traitement des données personnelles (RGPD).",
       canonicalPath: '/legal/politique-mentions.html',

@@ -4,7 +4,7 @@
 
 @layer base {
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
   }
@@ -39,6 +39,19 @@ html, body {
 }
 html {
   -ms-touch-action: pan-x pan-y;
+}
+
+/* Couche de défense supplémentaire : empêche tout geste à 2 doigts qui
+   ne serait pas capturé par touch-action sur certains navigateurs anciens.
+   NoZoomGuard.jsx ajoute aussi les listeners JS pour une couverture complète. */
+html, body {
+  /* Désactive le comportement natif de pinch sur Webkit ancien */
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Désactive le zoom sur les iframes embarqués (YouTube, Maps…) si besoin */
+iframe {
+  touch-action: pan-x pan-y;
 }
 
 /* Permet la sélection de texte dans les inputs */
