@@ -11,10 +11,14 @@ const NAV_LINKS = [
   { label: 'FAQ', href: '#faq' },
 ];
 
-function Brand() {
+function Brand({ compact = false }) {
   return (
-    <a href="#top" className="flex items-center gap-2.5 group">
-      <div className="h-11 w-11 rounded-lg bg-white p-0.5 ring-1 ring-brand-gold/30 flex items-center justify-center">
+    <a href="#top" className="flex items-center gap-2.5 group min-w-0">
+      <div
+        className={`${
+          compact ? 'h-9 w-9' : 'h-11 w-11'
+        } rounded-lg bg-white p-0.5 ring-1 ring-brand-gold/40 flex items-center justify-center flex-shrink-0`}
+      >
         <img
           src={LOGO}
           alt={`${BRAND.name} ${BRAND.tagline}`}
@@ -23,11 +27,11 @@ function Brand() {
           height="44"
         />
       </div>
-      <span className="flex flex-col leading-none">
-        <span className="font-display tracking-[0.1em] font-semibold text-brand-ink text-lg lg:text-xl">
+      <span className="flex flex-col leading-none min-w-0">
+        <span className="font-display tracking-[0.1em] font-semibold text-brand-ink text-lg lg:text-xl truncate">
           {BRAND.name.toUpperCase()}
         </span>
-        <span className="text-[9px] tracking-[0.2em] uppercase text-brand-gold font-medium">
+        <span className="text-[9px] tracking-[0.2em] uppercase text-brand-gold font-medium mt-0.5 truncate">
           {BRAND.tagline}
         </span>
       </span>
@@ -35,97 +39,71 @@ function Brand() {
   );
 }
 
-/** PC : CTA consultation. */
+/** PC : CTA consultation (pastille premium). */
 function DesktopCTA() {
   return (
     <a
       href="#contact"
-      className="ml-1 px-5 py-2.5 bg-brand-gold text-white text-[12px] tracking-[0.12em] uppercase font-semibold rounded-full hover:bg-[#5E4F34] transition-all duration-300 shadow-lg shadow-brand-gold/20"
+      className="px-5 py-2.5 bg-brand-gold text-white text-[12px] tracking-[0.12em] uppercase font-semibold rounded-full hover:bg-brand-goldLight transition-all duration-300 shadow-lg shadow-brand-gold/25 hover:shadow-brand-gold/40 whitespace-nowrap"
     >
       Consultation gratuite
     </a>
   );
 }
 
+/** Bouton téléphone outline (équilibre visuel avec le CTA rempli). */
+function DesktopPhone() {
+  return (
+    <a
+      href={`tel:${BRAND.phones[1].tel}`}
+      aria-label={`Appeler ${BRAND.phones[1].name}`}
+      className="flex items-center gap-2 px-4 py-2.5 bg-white text-brand-ink text-[12px] tracking-[0.12em] uppercase font-semibold rounded-full border border-brand-gold/40 hover:bg-brand-gold/10 hover:border-brand-gold/70 transition-all duration-300 whitespace-nowrap"
+    >
+      <Phone className="w-4 h-4 text-brand-gold" aria-hidden="true" />
+      <span>Appeler</span>
+    </a>
+  );
+}
+
 export default function Navbar() {
   const { open: mobileOpen, close: closeMenu } = useMenu();
-  // PC only : la navbar se cache quand on scrolle vers le bas,
-  // réapparaît quand on remonte. Aucun effet sur mobile/tablette.
-  const [hidden, setHidden] = useState(false);
-
-  useEffect(() => {
-    let lastY = window.scrollY;
-    let ticking = false;
-
-    const update = () => {
-      const y = window.scrollY;
-      const delta = y - lastY;
-
-      // Tolérance en haut de page : toujours visible.
-      if (y < 40) {
-        setHidden(false);
-      } else if (delta > 4) {
-        // scroll down → cache
-        setHidden(true);
-      } else if (delta < -4) {
-        // scroll up → réaffiche
-        setHidden(false);
-      }
-      lastY = y;
-      ticking = false;
-    };
-
-    const onScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(update);
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   return (
     <>
+      {/* === PC (lg+) : grille 3 colonnes VRAIMENT symétrique ===
+          col 1 : Brand (largeur naturelle)
+          col 2 : nav centrée mathématiquement (justify-self: center)
+          col 3 : Phone + CTA (justify-self: end)
+          → la nav est centrée sur l'axe du viewport, pas décalée par la largeur du Brand/CTA. */}
       <header
-        className={`hidden lg:block fixed top-0 left-0 right-0 z-50 bg-white border-b border-brand-gold/15 transition-transform duration-300 will-change-transform ${
-          hidden ? '-translate-y-full' : 'translate-y-0'
-        }`}
+        className="hidden lg:block fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-brand-gold/20 shadow-[0_2px_24px_-12px_rgba(140,118,78,0.25)]"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-10">
-          <div className="flex items-center justify-between h-14 lg:h-[72px] gap-6">
-            {/* Gauche : Brand */}
-            <div className="flex items-center justify-start">
+          <div className="grid grid-cols-[1fr_auto_1fr] items-center h-[72px] gap-6">
+            {/* Col 1 — Brand à gauche */}
+            <div className="flex items-center justify-start min-w-0">
               <Brand />
             </div>
 
-            {/* Centre : navigation principale, réellement centrée sur l'axe X */}
+            {/* Col 2 — Nav centrée mathématiquement */}
             <nav
-              className="hidden lg:flex items-center gap-1"
+              className="flex items-center gap-1 justify-self-center"
               aria-label="Navigation principale"
             >
               {NAV_LINKS.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="px-4 py-2 rounded-full text-[13px] font-medium tracking-wide transition-all duration-200 text-brand-ink/70 hover:bg-brand-gold/10 hover:text-brand-gold"
+                  className="relative px-4 py-2 rounded-full text-[13px] font-medium tracking-wide transition-all duration-200 text-brand-ink/70 hover:text-brand-gold after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-1 after:h-px after:w-0 after:bg-brand-gold after:transition-all after:duration-300 hover:after:w-6"
                 >
                   {link.label}
                 </a>
               ))}
             </nav>
 
-            {/* Droite : CTA — flex-1 + justify-end pour équilibrer la largeur du Brand et garder le centre centré */}
-            <div className="hidden lg:flex flex-1 items-center justify-end gap-3">
-              <a
-                href={`tel:${BRAND.phones[1].tel}`}
-                aria-label={`Appeler ${BRAND.phones[1].name}`}
-                className="flex items-center gap-2 px-4 py-2.5 bg-white text-brand-ink text-[12px] tracking-[0.12em] uppercase font-semibold rounded-full border border-brand-gold/30 hover:bg-brand-gold/10 hover:border-brand-gold/60 transition-all duration-300"
-              >
-                <Phone className="w-4 h-4 text-brand-gold" aria-hidden="true" />
-                <span>Appeler</span>
-              </a>
+            {/* Col 3 — Phone + CTA à droite */}
+            <div className="flex items-center justify-end gap-3 justify-self-end">
+              <DesktopPhone />
               <DesktopCTA />
             </div>
           </div>
@@ -143,14 +121,19 @@ export default function Navbar() {
           aria-label="Menu principal"
         >
           {/* Header compact — pas d'espace transparent au-dessus */}
-          <div className="flex items-center justify-between px-4 h-14 border-b border-gray-100 flex-shrink-0">
+          <div className="flex items-center justify-between px-4 h-14 border-b border-brand-gold/20 bg-gradient-to-r from-brand-cream/40 via-white to-white flex-shrink-0">
             <div className="flex items-center gap-2.5 min-w-0">
-              <div className="h-9 w-9 rounded-lg bg-white p-0.5 ring-1 ring-brand-gold/30 flex items-center justify-center flex-shrink-0">
+              <div className="h-9 w-9 rounded-lg bg-white p-0.5 ring-1 ring-brand-gold/40 flex items-center justify-center flex-shrink-0">
                 <img src={LOGO} alt="" className="h-full w-full object-contain" />
               </div>
-              <span className="font-display text-base tracking-wide text-brand-ink font-semibold truncate">
-                {BRAND.name.toUpperCase()}
-              </span>
+              <div className="flex flex-col leading-none min-w-0">
+                <span className="font-display text-[15px] tracking-[0.1em] font-semibold text-brand-ink truncate">
+                  {BRAND.name.toUpperCase()}
+                </span>
+                <span className="text-[8px] tracking-[0.2em] uppercase text-brand-gold font-medium mt-0.5 truncate">
+                  {BRAND.tagline}
+                </span>
+              </div>
             </div>
             <button
               onClick={closeMenu}

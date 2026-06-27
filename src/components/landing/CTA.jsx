@@ -186,9 +186,9 @@ function ContactForm() {
       className="bg-white/5 border border-white/10 rounded-3xl p-5 sm:p-7 lg:p-8 space-y-4 sm:space-y-5"
       noValidate
     >
-      {/* Grille interne 2 col (md+) — garantit une symétrie parfaite sur tablette et PC.
-          Mobile (grid-cols-1) empile proprement. Les blocs uniques traversent 2 col. */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+      {/* Grille interne 2 col (sm+) — garantit une symétrie parfaite sur tablette et PC.
+          Mobile (grid-cols-1 par défaut) empile proprement. Les blocs uniques traversent 2 col. */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
         {/* Paire 1 : identité */}
         <div className="md:col-span-1">
           <label htmlFor="prenom" className={labelClass}>Prénom</label>
