@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { MenuProvider } from '@/lib/menu-context';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 // Above the fold — chargés immédiatement
 import Navbar from '@/components/layout/Navbar';
@@ -43,6 +44,7 @@ export default function App() {
           <Footer />
           <LegalCombined />
         </Suspense>
+        <SpeedInsights />
       </div>
     </MenuProvider>
   );
