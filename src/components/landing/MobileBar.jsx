@@ -32,7 +32,7 @@ export default function MobileBar() {
 
   return (
     <div
-      className="lg:hidden fixed top-0 left-0 right-0 z-[55] bg-white border-b border-brand-gold/15 shadow-sm"
+      className="lg:hidden fixed top-0 left-0 right-0 z-[55] bg-white/95 backdrop-blur-md border-b border-brand-gold/25 shadow-[0_2px_20px_-10px_rgba(140,118,78,0.3)]"
       role="toolbar"
       aria-label="Actions rapides"
     >
@@ -42,7 +42,7 @@ export default function MobileBar() {
           aria-label={`${BRAND.name} ${BRAND.tagline} — retour en haut`}
           className="flex items-center gap-2.5 group min-w-0"
         >
-          <div className="h-10 w-10 rounded-lg bg-white p-0.5 ring-1 ring-brand-gold/30 flex items-center justify-center flex-shrink-0">
+          <div className="h-10 w-10 rounded-lg bg-white p-0.5 ring-1 ring-brand-gold/40 flex items-center justify-center flex-shrink-0">
             <img src={LOGO} alt="" className="h-full w-full object-contain" />
           </div>
           <span className="flex flex-col leading-none min-w-0">
@@ -55,7 +55,7 @@ export default function MobileBar() {
           </span>
         </a>
 
-        <div className="flex items-center gap-2 flex-shrink-0">
+        <div className="flex items-center gap-1.5 flex-shrink-0">
           <a
             href={`tel:${BRAND.phones[1].tel}`}
             aria-label={`Appeler ${BRAND.phones[1].name}`}
@@ -66,7 +66,7 @@ export default function MobileBar() {
           <a
             href={`mailto:${BRAND.email}`}
             aria-label="Envoyer un email"
-            className="h-10 w-10 flex items-center justify-center rounded-full bg-brand-cream text-brand-ink border border-brand-gold/30 active:scale-95 transition-transform"
+            className="h-10 w-10 flex items-center justify-center rounded-full bg-brand-cream text-brand-ink border border-brand-gold/40 active:scale-95 transition-transform"
           >
             <Mail className="w-4 h-4 text-brand-gold" aria-hidden="true" />
           </a>

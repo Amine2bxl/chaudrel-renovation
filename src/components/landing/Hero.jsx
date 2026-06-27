@@ -28,7 +28,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D0D]/90 via-[#0D0D0D]/40 to-[#0D0D0D]/10" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-5 lg:px-10 pb-10 lg:pb-24 pt-20 sm:pt-24 lg:pt-28 w-full">
+      <div className="relative z-10 max-w-7xl mx-auto px-5 lg:px-10 pb-10 lg:pb-24 pt-16 lg:pt-24 w-full">
         <div className="max-w-3xl">
           <div className="hero-fade hero-d1 inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/15 rounded-full px-4 py-2 mb-8">
             <div className="flex gap-0.5" aria-label="Note 5 étoiles">
