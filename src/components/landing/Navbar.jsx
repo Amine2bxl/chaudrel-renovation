@@ -40,7 +40,7 @@ function DesktopCTA() {
   return (
     <a
       href="#contact"
-      className="ml-1 px-5 py-2.5 bg-brand-gold text-white text-[12px] tracking-[0.12em] uppercase font-semibold rounded-full hover:bg-[#5E4F34] transition-all duration-300 shadow-lg shadow-brand-gold/20"
+      className="px-5 py-2.5 bg-brand-gold text-white text-[12px] tracking-[0.12em] uppercase font-semibold rounded-full hover:bg-[#5E4F34] transition-all duration-300 shadow-lg shadow-brand-gold/20"
     >
       Consultation gratuite
     </a>
@@ -55,7 +55,7 @@ export default function Navbar() {
       {/* PC : navbar fixe, toujours visible, centrée verticalement, pas d'espace transparent au-dessus. */}
       <header className="hidden lg:block fixed top-0 left-0 right-0 z-50 bg-white border-b border-brand-gold/15">
         <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-10">
-          <div className="grid grid-cols-[1fr_auto_1fr] items-center h-[72px] gap-6">
+          <div className="grid grid-cols-[1fr_auto_1fr] items-center h-[72px] gap-3">
             {/* Gauche : Brand */}
             <div className="flex items-center justify-start">
               <Brand />
