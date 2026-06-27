@@ -1,4 +1,5 @@
 import { lazy, Suspense } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { MenuProvider } from '@/lib/menu-context';
 
 // Above the fold — chargés immédiatement
@@ -44,6 +45,7 @@ export default function App() {
           <LegalCombined />
         </Suspense>
       </div>
+      <Analytics />
     </MenuProvider>
   );
 }
