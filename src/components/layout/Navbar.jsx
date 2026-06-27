@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { Phone, X, Mail } from 'lucide-react';
 import { BRAND, LOGO } from '@/lib/content';
 import { useMenu } from '@/lib/menu-context';
@@ -35,14 +34,15 @@ function Brand() {
   );
 }
 
-/** PC : CTA consultation. */
+/** PC : CTA email (style cohérent avec la version mobile). */
 function DesktopCTA() {
   return (
     <a
-      href="#contact"
-      className="px-5 py-2.5 bg-brand-gold text-white text-[12px] tracking-[0.12em] uppercase font-semibold rounded-full hover:bg-[#5E4F34] transition-all duration-300 shadow-lg shadow-brand-gold/20"
+      href={`mailto:${BRAND.email}`}
+      className="flex items-center gap-2 px-4 py-2.5 bg-brand-gold text-white text-[12px] tracking-[0.12em] uppercase font-semibold rounded-full hover:bg-[#5E4F34] transition-all duration-300 shadow-lg shadow-brand-gold/20"
     >
-      Consultation gratuite
+      <Mail className="w-4 h-4" aria-hidden="true" />
+      <span>Email</span>
     </a>
   );
 }
@@ -61,9 +61,10 @@ export default function Navbar() {
               <Brand />
             </div>
 
-            {/* Centre : navigation principale */}
+            {/* Centre : navigation principale — décalée légèrement à gauche pour paraître centrée
+                (le bloc de droite est plus large que le brand à gauche). */}
             <nav
-              className="flex items-center gap-1"
+              className="flex items-center gap-1 -translate-x-6"
               aria-label="Navigation principale"
             >
               {NAV_LINKS.map((link) => (
