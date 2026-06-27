@@ -186,79 +186,84 @@ function ContactForm() {
       className="bg-white/5 border border-white/10 rounded-3xl p-5 sm:p-7 lg:p-8 space-y-4 sm:space-y-5"
       noValidate
     >
-      {/* Grille interne 2 col (md+) — garantit une symétrie parfaite sur tablette et PC.
-          Mobile (grid-cols-1) empile proprement. Les blocs uniques traversent 2 col. */}
+      {/* Grille interne 2 col (md+) — symétrie parfaite sur tablette ET PC.
+          Mobile (grid-cols-1) empile proprement. Chaque ligne interne est une paire ou un col-span-2 explicite. */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
         {/* Paire 1 : identité */}
-        <div className="md:col-span-1">
+        <div>
           <label htmlFor="prenom" className={labelClass}>Prénom</label>
           <input id="prenom" name="prenom" type="text" required placeholder="Votre prénom" className={inputClass} />
         </div>
-        <div className="md:col-span-1">
+        <div>
           <label htmlFor="nom" className={labelClass}>Nom</label>
           <input id="nom" name="nom" type="text" required placeholder="Votre nom" className={inputClass} />
         </div>
 
         {/* Paire 2 : contact */}
-        <div className="md:col-span-1">
+        <div>
           <label htmlFor="email" className={labelClass}>Email</label>
           <input id="email" name="email" type="email" required placeholder="votre@email.com" className={inputClass} />
         </div>
-        <div className="md:col-span-1">
+        <div>
           <label htmlFor="telephone" className={labelClass}>Téléphone</label>
           <input id="telephone" name="telephone" type="tel" placeholder="+32 ..." className={inputClass} />
         </div>
 
-        {/* Localisation : titre de section, traverse les 2 colonnes */}
-        <fieldset className="md:col-span-2 space-y-4 sm:space-y-5 p-4 sm:p-5 bg-white/[0.03] border border-white/8 rounded-2xl">
-          <legend className="px-2 text-[10px] tracking-[0.18em] uppercase text-brand-goldLight/80 font-semibold">
+        {/* Localisation : fieldset pleine largeur qui contient sa PROPRE grille 2 col.
+            Chaque ligne est soit une paire (CP + Ville) soit un col-span-2. */}
+        <fieldset className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 p-4 sm:p-5 bg-white/[0.03] border border-white/8 rounded-2xl">
+          <legend className="col-span-1 md:col-span-2 px-2 text-[10px] tracking-[0.18em] uppercase text-brand-goldLight/80 font-semibold mb-1">
             Localisation
           </legend>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
-            <div>
-              <label htmlFor="code_postal" className={labelClass}>Code postal</label>
-              <input
-                id="code_postal"
-                name="code_postal"
-                type="text"
-                inputMode="numeric"
-                maxLength="10"
-                placeholder="1050"
-                className={inputClass}
-              />
-            </div>
-            <div>
-              <label htmlFor="ville" className={labelClass}>Ville</label>
-              <input
-                id="ville"
-                name="ville"
-                type="text"
-                placeholder="Ixelles"
-                className={inputClass}
-              />
-            </div>
+          <div>
+            <label htmlFor="code_postal" className={labelClass}>Code postal</label>
+            <input
+              id="code_postal"
+              name="code_postal"
+              type="text"
+              inputMode="numeric"
+              maxLength="10"
+              placeholder="1050"
+              className={inputClass}
+            />
+          </div>
+          <div>
+            <label htmlFor="ville" className={labelClass}>Ville</label>
+            <input
+              id="ville"
+              name="ville"
+              type="text"
+              placeholder="Ixelles"
+              className={inputClass}
+            />
+          </div>
 
-            {/* Sélecteur type de bien : à l'intérieur du fieldset, occupe la moitié droite pour rester symétrique */}
-            <div className="md:col-span-2">
-              <label htmlFor="type_bien" className={labelClass}>Type de bien</label>
-              <select
-                id="type_bien"
-                name="type_bien"
-                defaultValue=""
-                className={`${inputClass} appearance-none`}
-              >
-                {PROPERTY_TYPES.map((t) => (
-                  <option key={t.value} value={t.value} className="bg-[#1C1C1C] text-white">
-                    {t.label}
-                  </option>
-                ))}
-              </select>
-            </div>
+          {/* Type de bien + hint : la 2e colonne reçoit un helper discret pour symétrie parfaite sur tablette/PC.
+              Mobile : empilé (helper sous le select). Tablette/PC : helper à droite du select. */}
+          <div>
+            <label htmlFor="type_bien" className={labelClass}>Type de bien</label>
+            <select
+              id="type_bien"
+              name="type_bien"
+              defaultValue=""
+              className={`${inputClass} appearance-none`}
+            >
+              {PROPERTY_TYPES.map((t) => (
+                <option key={t.value} value={t.value} className="bg-[#1C1C1C] text-white">
+                  {t.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="flex items-end pb-1">
+            <p className="text-[11px] text-white/35 leading-snug">
+              Maison, appartement, villa…<br />Indiquez le type de votre bien.
+            </p>
           </div>
         </fieldset>
 
-        {/* Type de projet : pleine largeur (2 col) */}
+        {/* Type de projet : pleine largeur (2 col) — reste aligné avec Type de bien ci-dessus */}
         <div className="md:col-span-2">
           <label htmlFor="projet" className={labelClass}>Type de projet</label>
           <select id="projet" name="projet" required defaultValue="" className={`${inputClass} appearance-none`}>

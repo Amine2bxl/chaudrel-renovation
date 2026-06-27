@@ -49,60 +49,21 @@ function DesktopCTA() {
 
 export default function Navbar() {
   const { open: mobileOpen, close: closeMenu } = useMenu();
-  // PC only : la navbar se cache quand on scrolle vers le bas,
-  // réapparaît quand on remonte. Aucun effet sur mobile/tablette.
-  const [hidden, setHidden] = useState(false);
-
-  useEffect(() => {
-    let lastY = window.scrollY;
-    let ticking = false;
-
-    const update = () => {
-      const y = window.scrollY;
-      const delta = y - lastY;
-
-      // Tolérance en haut de page : toujours visible.
-      if (y < 40) {
-        setHidden(false);
-      } else if (delta > 4) {
-        // scroll down → cache
-        setHidden(true);
-      } else if (delta < -4) {
-        // scroll up → réaffiche
-        setHidden(false);
-      }
-      lastY = y;
-      ticking = false;
-    };
-
-    const onScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(update);
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   return (
     <>
-      <header
-        className={`hidden lg:block fixed top-0 left-0 right-0 z-50 bg-white border-b border-brand-gold/15 transition-transform duration-300 will-change-transform ${
-          hidden ? '-translate-y-full' : 'translate-y-0'
-        }`}
-      >
+      {/* PC : navbar fixe, toujours visible, centrée verticalement, pas d'espace transparent au-dessus. */}
+      <header className="hidden lg:block fixed top-0 left-0 right-0 z-50 bg-white border-b border-brand-gold/15">
         <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-10">
-          <div className="flex items-center justify-between h-14 lg:h-[72px] gap-6">
+          <div className="grid grid-cols-[1fr_auto_1fr] items-center h-[72px] gap-6">
             {/* Gauche : Brand */}
             <div className="flex items-center justify-start">
               <Brand />
             </div>
 
-            {/* Centre : navigation principale, réellement centrée sur l'axe X */}
+            {/* Centre : navigation principale */}
             <nav
-              className="hidden lg:flex items-center gap-1"
+              className="flex items-center gap-1"
               aria-label="Navigation principale"
             >
               {NAV_LINKS.map((link) => (
@@ -116,8 +77,8 @@ export default function Navbar() {
               ))}
             </nav>
 
-            {/* Droite : CTA — flex-1 + justify-end pour équilibrer la largeur du Brand et garder le centre centré */}
-            <div className="hidden lg:flex flex-1 items-center justify-end gap-3">
+            {/* Droite : CTA */}
+            <div className="flex items-center justify-end gap-3">
               <a
                 href={`tel:${BRAND.phones[1].tel}`}
                 aria-label={`Appeler ${BRAND.phones[1].name}`}
