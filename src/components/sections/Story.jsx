@@ -19,7 +19,7 @@ export default function Story() {
                 src={IMAGES.story}
                 alt={`Intérieur rénové par ${BRAND.name}`}
                 className="w-full h-full object-cover"
-                loading="lazy"
+                loading="lazy" decoding="async"
               />
             </div>
             <Reveal delay={400} className="absolute -bottom-6 -right-4 lg:-right-8 bg-white rounded-2xl p-5 shadow-xl border border-brand-gold/10">

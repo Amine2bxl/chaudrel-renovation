@@ -33,7 +33,7 @@ function Slider({ before, after, label, type, location }) {
         alt={`Après — ${label}`}
         className="absolute inset-0 w-full h-full object-cover"
         draggable={false}
-        loading="lazy"
+        loading="lazy" decoding="async"
       />
 
       <div className="absolute inset-0 overflow-hidden" style={{ width: `${pos}%` }}>

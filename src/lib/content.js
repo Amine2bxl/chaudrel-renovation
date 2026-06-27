@@ -143,3 +143,24 @@ export const IMAGES = {
   ],
   story: '/story-before-after.webp',
 };
+
+/**
+ * Unsplash helper — Unsplash serves the same photo at any width via the `w=`
+ * query parameter. We default `auto=format` to AVIF/WebP when supported and
+ * keep `fit=crop` so art-directed crops stay consistent.
+ */
+const UNSPLASH_WIDTHS = [480, 768, 1080, 1440, 1920];
+
+export function unsplashUrl(url, width = 1080, quality = 75) {
+  if (!url || !url.includes('images.unsplash.com')) return url;
+  const u = new URL(url);
+  u.searchParams.set('w', String(width));
+  u.searchParams.set('q', String(quality));
+  u.searchParams.set('auto', 'format');
+  return u.toString();
+}
+
+export function unsplashSrcset(url, widths = UNSPLASH_WIDTHS) {
+  if (!url || !url.includes('images.unsplash.com')) return undefined;
+  return widths.map((w) => `${unsplashUrl(url, w)} ${w}w`).join(', ');
+}

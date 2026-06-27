@@ -75,7 +75,7 @@ export default function Services() {
                   src={SERVICES[active].image}
                   alt={SERVICES[active].title}
                   className="w-full h-full object-cover"
-                  loading="lazy"
+                  loading="lazy" decoding="async"
                 />
               </div>
               <p className="text-base text-brand-ink/70 font-light leading-relaxed max-w-lg">
@@ -91,7 +91,7 @@ export default function Services() {
             <Reveal key={service.id} delay={i * 100}>
               <article>
                 <div className="aspect-[4/3] overflow-hidden mb-5 bg-brand-cream">
-                  <img src={service.image} alt={service.title} className="w-full h-full object-cover" loading="lazy" />
+                  <img src={service.image} alt={service.title} className="w-full h-full object-cover" loading="lazy" decoding="async" />
                 </div>
                 <p className="text-[10px] tracking-[0.2em] uppercase text-brand-gold font-medium mb-2">
                   {service.subtitle}

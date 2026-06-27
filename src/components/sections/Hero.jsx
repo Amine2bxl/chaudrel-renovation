@@ -1,5 +1,5 @@
 import { ArrowRight, Star } from 'lucide-react';
-import { IMAGES } from '@/lib/content';
+import { IMAGES, unsplashUrl, unsplashSrcset } from '@/lib/content';
 
 const STATS = [
   { n: '150+', l: 'Projets réalisés' },
@@ -16,7 +16,9 @@ export default function Hero() {
       </h1>
       <div className="absolute inset-0 hero-kenburns">
         <img
-          src={IMAGES.hero}
+          src={unsplashUrl(IMAGES.hero, 1080)}
+          srcSet={unsplashSrcset(IMAGES.hero)}
+          sizes="100vw"
           alt="Rénovation haut de gamme à Bruxelles par Chaudrel — cuisine, salle de bain, toiture, jardin, piscine"
           className="w-full h-full object-cover"
           width="1920"
